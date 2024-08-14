@@ -1,0 +1,45 @@
+name: Gamemodes
+version: '1.0.0 (Testing phase)'
+main: com.typocreates.gamemodes.Gamemodes
+api-version: '1.20'
+authors: [Typo]
+description: Adds shortcuts and permissions for the /gamemode command.
+website: https://typocreates.com/plugins/gamemodes/
+commands:
+  gma:
+    description: Sets the targeted player to Adventure mode, The default player is the command executor.
+    permission: Gamemodes.GMA
+    usage: /<command> <player>
+  gmc:
+    description: Sets the targeted player to Creative mode, The default player is the command executor.
+    permission: Gamemodes.GMC
+    usage: /<command> <player>
+  gms:
+    description: Sets the targeted player to Survival mode, The default player is the command executor.
+    permission: Gamemodes.GMS
+    usage: /<command> <player>
+  gmsp:
+    description: Sets the targeted player to Spectator mode, The default player is the command executor.
+    permission: Gamemodes.GMSP
+    usage: /<command> <player>
+
+permissions:
+  Gamemodes.ALL:
+    description: Allows the player to use all the gamemode commands.
+    children:
+      Gamemodes.GMA: true
+      Gamemodes.GMC: true
+      Gamemodes.GMS: true
+      Gamemodes.GMSP: true
+
+  Gamemodes.GMA:
+    description: Allows the player to use the /gma <player> command.
+
+  Gamemodes.GMC:
+    description: Allows the player to use the /gmc <player> command.
+
+  Gamemodes.GMS:
+    description: Allows the player to use the /gms <player> command.
+
+  Gamemodes.GMSP:
+    description: Allows the player to use the /gmsp <player> command.
