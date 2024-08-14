@@ -13,8 +13,6 @@ public final class Gamemodes extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup login
-        int pluginId = 23009;
-        Metrics metrics = new Metrics(this, pluginId);
         plugin = this;
         saveDefaultConfig();
         saveConfig();
