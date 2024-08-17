@@ -11,7 +11,7 @@ public class PlayerGamemodeChangeListener implements Listener {
     @EventHandler
     public void onPlayerGamemodeChange(PlayerGameModeChangeEvent e){
         Player p = e.getPlayer();
-        if (GmLockData.get().getString(p.getName()) == "True"){
+        if (GmLockData.get().getString(p.getUniqueId().toString()) == "True"){
             e.setCancelled(true);
             p.sendMessage(ChatColor.RED + "Your gamemode switch has been canceled because your gamemode has been locked.");
         }

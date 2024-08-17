@@ -10,7 +10,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
 public class GmLockCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
@@ -37,20 +36,24 @@ public class GmLockCommand implements CommandExecutor {
                 if (target != null) {
                     if (gamemode.equalsIgnoreCase("adventure")) {
                         target.setGameMode(GameMode.ADVENTURE);
-                        GmLockData.get().set(target.getName(), "True");
+                        GmLockData.get().set(target.getUniqueId().toString(), "True");
                         GmLockData.save();
+                        p.sendMessage(ChatColor.AQUA + target.getDisplayName() + ChatColor.YELLOW + "'s gamemode has been locked to Adventure.");
                     } else if (gamemode.equalsIgnoreCase("creative")) {
                         target.setGameMode(GameMode.CREATIVE);
-                        GmLockData.get().set(target.getName(), "True");
+                        GmLockData.get().set(target.getUniqueId().toString(), "True");
                         GmLockData.save();
+                        p.sendMessage(ChatColor.AQUA + target.getDisplayName() + ChatColor.YELLOW + "'s gamemode has been locked to Creative.");
                     } else if (gamemode.equalsIgnoreCase("survival")) {
                         target.setGameMode(GameMode.SURVIVAL);
-                        GmLockData.get().set(target.getName(), "True");
+                        GmLockData.get().set(target.getUniqueId().toString(), "True");
                         GmLockData.save();
+                        p.sendMessage(ChatColor.AQUA + target.getDisplayName() + ChatColor.YELLOW + "'s gamemode has been locked to Survival.");
                     } else if (gamemode.equalsIgnoreCase("spectator")) {
                         target.setGameMode(GameMode.SPECTATOR);
-                        GmLockData.get().set(target.getName(), "True");
+                        GmLockData.get().set(target.getUniqueId().toString(), "True");
                         GmLockData.save();
+                        p.sendMessage(ChatColor.AQUA + target.getDisplayName() + ChatColor.YELLOW + "'s gamemode has been locked to Spectator.");
                     }
 
                 }

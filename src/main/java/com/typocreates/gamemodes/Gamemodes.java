@@ -4,12 +4,12 @@ import com.typocreates.gamemodes.commands.*;
 import com.typocreates.gamemodes.files.GmLockData;
 import com.typocreates.gamemodes.listeners.PlayerGamemodeChangeListener;
 import com.typocreates.gamemodes.tabcompleters.GmLockTabCompleter;
+import com.typocreates.gamemodes.utils.UpdateChecker;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Callable;
 
 //Created with love by Typo <3
 
@@ -48,20 +48,35 @@ public final class Gamemodes extends JavaPlugin {
         GmLockData.save();
         //Loads commands
         getCommand("gma").setExecutor(new GmaCommand());
-        plugin.getLogger().info("GMA Command loaded.");
+        getLogger().info("GMA Command loaded.");
+
         getCommand("gmc").setExecutor(new GmcCommand());
-        plugin.getLogger().info("GMC Command loaded.");
+        getLogger().info("GMC Command loaded.");
+
         getCommand("gms").setExecutor(new GmsCommand());
-        plugin.getLogger().info("GMS Command loaded.");
+        getLogger().info("GMS Command loaded.");
+
         getCommand("gmsp").setExecutor(new GmspCommand());
-        plugin.getLogger().info("GMSP Command loaded.");
+        getLogger().info("GMSP Command loaded.");
+
         getCommand("gmlock").setExecutor(new GmLockCommand());
         getCommand("gmlock").setTabCompleter(new GmLockTabCompleter());
-        plugin.getLogger().info("Beta Feature: GMLock command loaded.");
+        getLogger().info("Beta Feature: GMLock command loaded.");
+
         getCommand("gmunlock").setExecutor(new GmUnlockCommand());
-        plugin.getLogger().info("Beta Feature: GMUnlock command loaded.");
+        getLogger().info("Beta Feature: GMUnlock command loaded.");
+
         getServer().getPluginManager().registerEvents(new PlayerGamemodeChangeListener(), this);
-        plugin.getLogger().info("Gamemode change event listener loaded.");
+        getLogger().info("Gamemode change event listener loaded.");
+
+        new UpdateChecker(this, 118865).getVersion(version -> {
+            if (this.getDescription().getVersion().equals(version)) {
+                getLogger().info("Update check complete, No need updates needed.");
+            } else {
+                getLogger().info("Update check complete, Updates are needed!");
+            }
+        });
+
         plugin.getLogger().info("Plugin fully loaded.");
     }
 
