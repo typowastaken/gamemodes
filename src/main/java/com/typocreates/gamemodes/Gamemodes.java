@@ -1,9 +1,9 @@
 package com.typocreates.gamemodes;
 
-import com.typocreates.gamemodes.commands.GmaCommand;
-import com.typocreates.gamemodes.commands.GmcCommand;
-import com.typocreates.gamemodes.commands.GmsCommand;
-import com.typocreates.gamemodes.commands.GmspCommand;
+import com.typocreates.gamemodes.commands.*;
+import com.typocreates.gamemodes.files.GmLockData;
+import com.typocreates.gamemodes.listeners.PlayerGamemodeChangeListener;
+import com.typocreates.gamemodes.tabcompleters.GmLockTabCompleter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -19,9 +19,7 @@ public final class Gamemodes extends JavaPlugin {
     public void onEnable() {
         // Plugin startup login
         plugin = this;
-
-
-
+        //Adds plugin Metrics
         Metrics metrics = new Metrics(this, 23009);
         metrics.addCustomChart(new Metrics.SingleLineChart("players", () -> Bukkit.getOnlinePlayers().size()));
 
@@ -42,9 +40,13 @@ public final class Gamemodes extends JavaPlugin {
             return map;
         }));
 
-
+        //Loads config
         saveDefaultConfig();
-        saveConfig();
+        //Load the GamemodeLockData file
+        GmLockData.setup();
+        GmLockData.get().options().copyDefaults(true);
+        GmLockData.save();
+        //Loads commands
         getCommand("gma").setExecutor(new GmaCommand());
         plugin.getLogger().info("GMA Command loaded.");
         getCommand("gmc").setExecutor(new GmcCommand());
@@ -53,6 +55,13 @@ public final class Gamemodes extends JavaPlugin {
         plugin.getLogger().info("GMS Command loaded.");
         getCommand("gmsp").setExecutor(new GmspCommand());
         plugin.getLogger().info("GMSP Command loaded.");
+        getCommand("gmlock").setExecutor(new GmLockCommand());
+        getCommand("gmlock").setTabCompleter(new GmLockTabCompleter());
+        plugin.getLogger().info("Beta Feature: GMLock command loaded.");
+        getCommand("gmunlock").setExecutor(new GmUnlockCommand());
+        plugin.getLogger().info("Beta Feature: GMUnlock command loaded.");
+        getServer().getPluginManager().registerEvents(new PlayerGamemodeChangeListener(), this);
+        plugin.getLogger().info("Gamemode change event listener loaded.");
         plugin.getLogger().info("Plugin fully loaded.");
     }
 

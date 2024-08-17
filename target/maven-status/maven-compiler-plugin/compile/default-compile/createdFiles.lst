@@ -10,8 +10,13 @@ com\typocreates\gamemodes\commands\GmaCommand.class
 com\typocreates\gamemodes\Metrics.class
 com\typocreates\gamemodes\Gamemodes.class
 com\typocreates\gamemodes\commands\GmspCommand.class
+com\typocreates\gamemodes\files\GmLockData.class
 com\typocreates\gamemodes\commands\GmcCommand.class
+com\typocreates\gamemodes\commands\GmLockCommand.class
 com\typocreates\gamemodes\Metrics$AdvancedPie.class
 com\typocreates\gamemodes\Metrics$JsonObjectBuilder$JsonObject.class
 com\typocreates\gamemodes\Metrics$SimplePie.class
 com\typocreates\gamemodes\Metrics$SingleLineChart.class
+com\typocreates\gamemodes\tabcompleters\GmLockTabCompleter.class
+com\typocreates\gamemodes\commands\GmUnlockCommand.class
+com\typocreates\gamemodes\listeners\PlayerGamemodeChangeListener.class
