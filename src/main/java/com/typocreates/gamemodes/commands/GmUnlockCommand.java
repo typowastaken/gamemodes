@@ -14,7 +14,7 @@ public class GmUnlockCommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         String playerName = strings[0];
         Player target = Bukkit.getServer().getPlayerExact(playerName);
-        GmLockData.get().set(target.getUniqueId().toString(), null);
+        GmLockData.get().set(playerName, null);
         GmLockData.save();
         if (commandSender instanceof Player){
             Player p = (Player) commandSender;
@@ -22,6 +22,8 @@ public class GmUnlockCommand implements CommandExecutor {
         }else{
             Gamemodes.getPlugin().getLogger().info(ChatColor.YELLOW + "Unlocked " + ChatColor.AQUA + target.getDisplayName() + ChatColor.YELLOW + "'s gamemode.");
         }
+
+
         return true;
     }
 }

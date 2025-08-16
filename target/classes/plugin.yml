@@ -1,5 +1,5 @@
 name: Gamemodes
-version: '1.0.3'
+version: '1.0.3 (Beta)'
 main: com.typocreates.gamemodes.Gamemodes
 api-version: '1.20'
 authors: [Typo]
@@ -9,27 +9,27 @@ commands:
   gma:
     description: Sets the targeted player to Adventure mode, The default player is the command executor.
     permission: Gamemodes.GMA
-    usage:
+    usage: /<command> <player>
   gmc:
     description: Sets the targeted player to Creative mode, The default player is the command executor.
     permission: Gamemodes.GMC
-    usage:
+    usage: /<command> <player>
   gms:
     description: Sets the targeted player to Survival mode, The default player is the command executor.
     permission: Gamemodes.GMS
-    usage:
+    usage: /<command> <player>
   gmsp:
     description: Sets the targeted player to Spectator mode, The default player is the command executor.
     permission: Gamemodes.GMSP
-    usage:
+    usage: /<command> <player>
   gmlock:
     description: Sets the targeted player to the selected gamemode and locks them in that gamemode until the /GMUnlock command is used on them.
     permission: Gamemodes.GMLock
-    usage:
+    usage: /<command> <player> <gamemode>
   gmunlock:
     description: Allows the targeted player to switch gamemodes again after having the /GMLock command used on them.
     permission: Gamemodes.GMUnlock
-    usage:
+    usage: /<command> <player>
 
 permissions:
   Gamemodes.ALL:
@@ -52,8 +52,3 @@ permissions:
   Gamemodes.GMSP:
     description: Allows the player to use the /gmsp <player> command.
 
-  Gamemodes.GMLock:
-    description: Allows the player to use the /GMLock <player> <gamemode> command.
-
-  Gamemodes.GMUnlock:
-    description: Allows the player to use the /GMUnlock <player> command.
