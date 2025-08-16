@@ -1,5 +1,5 @@
 name: Gamemodes
-version: '1.0.3 (Beta)'
+version: '1.0.2'
 main: com.typocreates.gamemodes.Gamemodes
 api-version: '1.20'
 authors: [Typo]
@@ -22,14 +22,6 @@ commands:
     description: Sets the targeted player to Spectator mode, The default player is the command executor.
     permission: Gamemodes.GMSP
     usage: /<command> <player>
-  gmlock:
-    description: Sets the targeted player to the selected gamemode and locks them in that gamemode until the /GMUnlock command is used on them.
-    permission: Gamemodes.GMLock
-    usage: /<command> <player> <gamemode>
-  gmunlock:
-    description: Allows the targeted player to switch gamemodes again after having the /GMLock command used on them.
-    permission: Gamemodes.GMUnlock
-    usage: /<command> <player>
 
 permissions:
   Gamemodes.ALL:
@@ -51,4 +43,3 @@ permissions:
 
   Gamemodes.GMSP:
     description: Allows the player to use the /gmsp <player> command.
-
