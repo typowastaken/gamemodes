@@ -1,5 +1,5 @@
 name: Gamemodes
-version: '1.0.0'
+version: '1.0.0 (Testing phase)'
 main: com.typocreates.gamemodes.Gamemodes
 api-version: '1.20'
 authors: [Typo]
