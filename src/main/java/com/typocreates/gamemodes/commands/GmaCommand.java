@@ -1,6 +1,7 @@
 package com.typocreates.gamemodes.commands;
 
 import com.typocreates.gamemodes.Gamemodes;
+import com.typocreates.gamemodes.files.GmLockData;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
