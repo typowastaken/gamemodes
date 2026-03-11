@@ -11,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.util.HashMap;
 import java.util.Map;
 
-//Created with love by Typo <3
+// Created with love by Typo <3
 
 public final class Gamemodes extends JavaPlugin {
     private static Gamemodes plugin;
@@ -19,7 +19,7 @@ public final class Gamemodes extends JavaPlugin {
     public void onEnable() {
         // Plugin startup login
         plugin = this;
-        //Adds plugin Metrics
+        // Adds plugin Metrics
         Metrics metrics = new Metrics(this, 23009);
         metrics.addCustomChart(new Metrics.SingleLineChart("players", () -> Bukkit.getOnlinePlayers().size()));
 
@@ -40,13 +40,13 @@ public final class Gamemodes extends JavaPlugin {
             return map;
         }));
 
-        //Loads config
+        // Loads config
         saveDefaultConfig();
-        //Load the GamemodeLockData file
+        // Load the GamemodeLockData file
         GmLockData.setup();
         GmLockData.get().options().copyDefaults(true);
         GmLockData.save();
-        //Loads commands
+        // Loads commands
         getCommand("gma").setExecutor(new GmaCommand());
         getLogger().info("GMA Command loaded.");
 
