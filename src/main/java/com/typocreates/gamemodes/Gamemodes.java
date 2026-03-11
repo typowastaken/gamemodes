@@ -4,6 +4,7 @@ import com.typocreates.gamemodes.commands.*;
 import com.typocreates.gamemodes.files.GmLockData;
 import com.typocreates.gamemodes.listeners.PlayerGamemodeChangeListener;
 import com.typocreates.gamemodes.tabcompleters.GmLockTabCompleter;
+import com.typocreates.gamemodes.utils.GeneralUtil;
 import com.typocreates.gamemodes.utils.UpdateChecker;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -15,10 +16,12 @@ import java.util.Map;
 
 public final class Gamemodes extends JavaPlugin {
     private static Gamemodes plugin;
+    private static GeneralUtil gu;
     @Override
     public void onEnable() {
         // Plugin startup login
         plugin = this;
+        gu = new GeneralUtil();
         // Adds plugin Metrics
         Metrics metrics = new Metrics(this, 23009);
         metrics.addCustomChart(new Metrics.SingleLineChart("players", () -> Bukkit.getOnlinePlayers().size()));
