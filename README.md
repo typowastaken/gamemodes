@@ -11,3 +11,6 @@ It may take awhile for things to get added as I've been really busy recently but
 
 
 This project is currently **source-available** and all rights are reserved
+
+
+*Psttt, if you're looking at the commit history and it looks weird, it's because I messed up while connecting my IDE to Github and it fucked up the histroy somehow* :sob:*, I have zero clue what I did but it's fixed now so that's all that matters!* :smile:
