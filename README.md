@@ -1,12 +1,16 @@
-The README file got deleted while I was trying to fix my connection to Github so heres the basic information:
+Here is the modrinth page to download the plugin! :D
+https://modrinth.com/project/CD4bmArk
 
-@TypoWasTaken on Discord if you encounter any issues (Or open an issue!)
+If you encounter any issues in the plugin, please report them using Github Issues or send me a DM on Discord! @TypoWasTaken :)
+
+Future plans:
+- Move the GMLock data over to SQLite
+- Move the version checker over to the Modrinth API instead of Spigot
+It may take awhile for things to get added as I've been really busy recently but any major issues should be fixed ASAP
+
+
 
 This project is currently **source-available** and all rights are reserved
 
-I plan to move the GMLock data over to SQLite in the future but I've been short on time recently
 
-I have plans to move the version checker over to the Modrinth API instead of Spigot
-
-Here is the modrinth page to download the plugin! :D
-https://modrinth.com/project/CD4bmArk
+*Psttt, if you're looking at the commit history and it looks weird, it's because I messed up while connecting my IDE to Github and it fucked up the histroy somehow* :sob:*, I have zero clue what I did but it's fixed now so that's all that matters!* :smile:
