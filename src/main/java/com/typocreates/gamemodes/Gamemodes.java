@@ -11,17 +11,21 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 // Created with love by Typo <3
 
 public final class Gamemodes extends JavaPlugin {
-    private static Gamemodes plugin;
-    private static GeneralUtil gu;
+    private Gamemodes plugin;
+    private GeneralUtil gu;
+
+
     @Override
     public void onEnable() {
-        // Plugin startup login
         plugin = this;
         gu = new GeneralUtil();
+        Logger logger = plugin.getLogger();
+
         // Adds plugin Metrics
         Metrics metrics = new Metrics(this, 23009);
         metrics.addCustomChart(new Metrics.SingleLineChart("players", () -> Bukkit.getOnlinePlayers().size()));
@@ -50,24 +54,15 @@ public final class Gamemodes extends JavaPlugin {
         GmLockData.get().options().copyDefaults(true);
         GmLockData.save();
         // Loads commands
-        getCommand("gma").setExecutor(new GmaCommand());
-        getLogger().info("GMA Command loaded.");
-
+        logger.info("Loading commands!");
+        getCommand("gma").setExecutor(new GmaCommand(gu));
         getCommand("gmc").setExecutor(new GmcCommand());
-        getLogger().info("GMC Command loaded.");
-
         getCommand("gms").setExecutor(new GmsCommand());
-        getLogger().info("GMS Command loaded.");
-
         getCommand("gmsp").setExecutor(new GmspCommand());
-        getLogger().info("GMSP Command loaded.");
-
         getCommand("gmlock").setExecutor(new GmLockCommand());
         getCommand("gmlock").setTabCompleter(new GmLockTabCompleter());
-        getLogger().info("GMLock command loaded.");
-
         getCommand("gmunlock").setExecutor(new GmUnlockCommand());
-        getLogger().info("GMUnlock command loaded.");
+        logger.info("Commands loaded!");
 
         getServer().getPluginManager().registerEvents(new PlayerGamemodeChangeListener(), this);
         getLogger().info("Gamemode change event listener loaded.");
@@ -88,5 +83,4 @@ public final class Gamemodes extends JavaPlugin {
         // Plugin shutdown logic
         plugin.getLogger().info("Plugin fully stopped.");
     }
-    public static Gamemodes getPlugin() { return plugin; }
 }
