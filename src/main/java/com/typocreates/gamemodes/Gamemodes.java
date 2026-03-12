@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public final class Gamemodes extends JavaPlugin {
     private Gamemodes plugin;
     private GeneralUtil gu;
-    private GmLockData lockData;
+    private GmLockData gmLockData;
 
 
     @Override
@@ -26,7 +26,7 @@ public final class Gamemodes extends JavaPlugin {
         plugin = this;
         Logger logger = plugin.getLogger();
 
-        // Adds plugin Metrics
+//         Adds plugin Metrics
         Metrics metrics = new Metrics(this, 23009);
         metrics.addCustomChart(new Metrics.SingleLineChart("players", () -> Bukkit.getOnlinePlayers().size()));
 
@@ -47,29 +47,27 @@ public final class Gamemodes extends JavaPlugin {
             return map;
         }));
 
-        // Loads config
+//         Load config THEN set gu since it relies on the config
         saveDefaultConfig();
+        gu = new GeneralUtil(this);
 
-
-        gu = new GeneralUtil(plugin);
-
-        // Load the GamemodeLockData file
-        lockData = new GmLockData(plugin);
-        lockData.setup();
-        lockData.get().options().copyDefaults(true);
-        lockData.save();
-        // Loads commands
+//         Load the GamemodeLockData file
+        gmLockData = new GmLockData(this);
+        gmLockData.setup();
+        gmLockData.get().options().copyDefaults(true);
+        gmLockData.save();
+//         Loads commands
         logger.info("Loading commands!");
         getCommand("gma").setExecutor(new GmaCommand(gu));
         getCommand("gmc").setExecutor(new GmcCommand(gu));
         getCommand("gms").setExecutor(new GmsCommand(gu));
         getCommand("gmsp").setExecutor(new GmspCommand(gu));
-        getCommand("gmlock").setExecutor(new GmLockCommand(plugin, lockData));
+        getCommand("gmlock").setExecutor(new GmLockCommand(this, gmLockData));
         getCommand("gmlock").setTabCompleter(new GmLockTabCompleter());
-        getCommand("gmunlock").setExecutor(new GmUnlockCommand(plugin, lockData));
+        getCommand("gmunlock").setExecutor(new GmUnlockCommand(this, gmLockData));
         logger.info("Commands loaded!");
 
-        getServer().getPluginManager().registerEvents(new PlayerGamemodeChangeListener(lockData), plugin);
+        getServer().getPluginManager().registerEvents(new PlayerGamemodeChangeListener(gmLockData), this);
         getLogger().info("Gamemode change event listener loaded.");
 
         new UpdateChecker(this, 118865).getVersion(version -> {
@@ -80,12 +78,12 @@ public final class Gamemodes extends JavaPlugin {
             }
         });
 
-        plugin.getLogger().info("Plugin fully loaded.");
+        this.getLogger().info("Plugin fully loaded.");
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+//         Plugin shutdown logic
         plugin.getLogger().info("Plugin fully stopped.");
     }
 }
