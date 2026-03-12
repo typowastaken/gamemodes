@@ -1,5 +1,4 @@
 package com.typocreates.gamemodes.commands;
-import com.typocreates.gamemodes.Gamemodes;
 import com.typocreates.gamemodes.files.GmLockData;
 import com.typocreates.gamemodes.utils.GeneralUtil;
 import org.bukkit.Bukkit;
@@ -11,11 +10,9 @@ import org.bukkit.entity.Player;
 import java.util.List;
 
 public class GmLockCommand implements CommandExecutor {
-    private final Gamemodes plugin;
     private final GeneralUtil gu;
     private final GmLockData gmLockData;
-    public GmLockCommand(Gamemodes plugin, GeneralUtil gu, GmLockData gmLockData) {
-        this.plugin = plugin;
+    public GmLockCommand(GeneralUtil gu, GmLockData gmLockData) {
         this.gu = gu;
         this.gmLockData = gmLockData;
     }
