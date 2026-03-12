@@ -1,71 +1,58 @@
 package com.typocreates.gamemodes.commands;
-
 import com.typocreates.gamemodes.Gamemodes;
 import com.typocreates.gamemodes.files.GmLockData;
+import com.typocreates.gamemodes.utils.GeneralUtil;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import java.util.List;
 
 public class GmLockCommand implements CommandExecutor {
     private final Gamemodes plugin;
-    private final GmLockData lockData;
-    public GmLockCommand(Gamemodes plugin, GmLockData lockData) {
+    private final GeneralUtil gu;
+    private final GmLockData gmLockData;
+    public GmLockCommand(Gamemodes plugin, GeneralUtil gu, GmLockData gmLockData) {
         this.plugin = plugin;
-        this.lockData = lockData;
+        this.gu = gu;
+        this.gmLockData = gmLockData;
     }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         if (strings.length == 0) {
-            if (commandSender instanceof Player) {
-                Player p = (Player) commandSender;
-                p.sendMessage(ChatColor.RED + "You must supply a username and a gamemode.");
-            } else {
-                plugin.getLogger().info(ChatColor.RED + "You must supply a username and a gamemode.");
-            }
-        } else if (strings.length == 1) {
-            if (commandSender instanceof Player) {
-                Player p = (Player) commandSender;
-                p.sendMessage(ChatColor.RED + "You must also supply a gamemode.");
-            } else {
-                plugin.getLogger().info(ChatColor.RED + "You must also supply a gamemode.");
-            }
-        } else if (strings.length == 2) {
-            if (commandSender instanceof Player) {
-                Player p = (Player) commandSender;
-                String playerName = strings[0];
-                Player target = Bukkit.getServer().getPlayerExact(playerName);
-                String gamemode = strings[1];
-                if (target != null) {
-                    if (gamemode.equalsIgnoreCase("adventure")) {
-                        target.setGameMode(GameMode.ADVENTURE);
-                        lockData.get().set(target.getUniqueId().toString(), "True");
-                        lockData.save();
-                        p.sendMessage(ChatColor.AQUA + target.getDisplayName() + ChatColor.YELLOW + "'s gamemode has been locked to Adventure.");
-                    } else if (gamemode.equalsIgnoreCase("creative")) {
-                        target.setGameMode(GameMode.CREATIVE);
-                        lockData.get().set(target.getUniqueId().toString(), "True");
-                        lockData.save();
-                        p.sendMessage(ChatColor.AQUA + target.getDisplayName() + ChatColor.YELLOW + "'s gamemode has been locked to Creative.");
-                    } else if (gamemode.equalsIgnoreCase("survival")) {
-                        target.setGameMode(GameMode.SURVIVAL);
-                        lockData.get().set(target.getUniqueId().toString(), "True");
-                        lockData.save();
-                        p.sendMessage(ChatColor.AQUA + target.getDisplayName() + ChatColor.YELLOW + "'s gamemode has been locked to Survival.");
-                    } else if (gamemode.equalsIgnoreCase("spectator")) {
-                        target.setGameMode(GameMode.SPECTATOR);
-                        lockData.get().set(target.getUniqueId().toString(), "True");
-                        lockData.save();
-                        p.sendMessage(ChatColor.AQUA + target.getDisplayName() + ChatColor.YELLOW + "'s gamemode has been locked to Spectator.");
-                    }
-
-                }
-            }
+            gu.sendErrorMessage(commandSender, "You must supply a username and a gamemode.");
+            return true;
         }
-        return false;
+        if (strings.length == 1) {
+            gu.sendErrorMessage(commandSender, "You must supply a gamemode.");
+            return true;
+        }
+        if (strings.length == 2) {
+            Player target = Bukkit.getPlayer(strings[0]);
+            if (target == null) {
+                gu.sendErrorMessage(commandSender, "That player could not be found, maybe they went offline?");
+                return true;
+            }
+
+            List<String> gamemodes = List.of("ADVENTURE", "CREATIVE", "SURVIVAL", "SPECTATOR");
+            String gamemode = strings[1];
+            if (!gamemodes.contains(gamemode.toUpperCase())) {
+                gu.sendErrorMessage(commandSender, "The gamemode '" + gamemode + "' doesn't exist.");
+                return true;
+            }
+
+            if (gmLockData.get().getString(target.getUniqueId().toString()) != null) {
+                gmLockData.get().set(target.getUniqueId().toString(), null);
+            }
+            target.setGameMode(GameMode.valueOf(gamemode.toUpperCase()));
+            gmLockData.get().set(target.getUniqueId().toString(), "true");
+            gmLockData.save();
+            gu.sendMessage(commandSender, String.format("%s's gamemode has been locked to %s.", target.getName(), gamemode));
+            return true;
+        }
+        return true;
     }
 }

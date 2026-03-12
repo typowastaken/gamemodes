@@ -20,7 +20,7 @@ public class PlayerGamemodeChangeListener implements Listener {
             return;
         }
 
-        if (locked.equalsIgnoreCase("True")){
+        if (locked.equalsIgnoreCase("true")){
             e.setCancelled(true);
             p.sendMessage(ChatColor.RED + "Your gamemode switch has been canceled because your gamemode has been locked.");
         }
