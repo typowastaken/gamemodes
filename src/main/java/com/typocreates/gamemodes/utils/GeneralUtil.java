@@ -7,10 +7,15 @@ import org.bukkit.entity.Player;
 
 
 public class GeneralUtil {
-    Gamemodes plugin = Gamemodes.getPlugin();
-    boolean doSounds = plugin.getConfig().getBoolean("do-sound-effects");
+    private final Gamemodes plugin;
+    public GeneralUtil(Gamemodes plugin) {
+        this.plugin = plugin;
+    }
+
+
 
     public void sendMessage(CommandSender commandSender, String message) {
+        boolean doSounds = plugin.getConfig().getBoolean("do-sound-effects");
         if (commandSender instanceof Player player) {
             if (doSounds) {
                 player.playSound(player, "minecraft:entity.experience_orb.pickup", 1, 1 );
@@ -19,10 +24,10 @@ public class GeneralUtil {
         } else {
             commandSender.sendMessage(message);
         }
-
     }
 
     public void sendErrorMessage(CommandSender commandSender, String message) {
+        boolean doSounds = plugin.getConfig().getBoolean("do-sound-effects");
         if (commandSender instanceof Player player) {
             if (doSounds) {
                 player.playSound(player, "minecraft:entity.experience_orb.pickup", 1, 1 );

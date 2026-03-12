@@ -18,12 +18,12 @@ import java.util.logging.Logger;
 public final class Gamemodes extends JavaPlugin {
     private Gamemodes plugin;
     private GeneralUtil gu;
+    private GmLockData lockData;
 
 
     @Override
     public void onEnable() {
         plugin = this;
-        gu = new GeneralUtil();
         Logger logger = plugin.getLogger();
 
         // Adds plugin Metrics
@@ -49,22 +49,27 @@ public final class Gamemodes extends JavaPlugin {
 
         // Loads config
         saveDefaultConfig();
+
+
+        gu = new GeneralUtil(plugin);
+
         // Load the GamemodeLockData file
-        GmLockData.setup();
-        GmLockData.get().options().copyDefaults(true);
-        GmLockData.save();
+        lockData = new GmLockData(plugin);
+        lockData.setup();
+        lockData.get().options().copyDefaults(true);
+        lockData.save();
         // Loads commands
         logger.info("Loading commands!");
         getCommand("gma").setExecutor(new GmaCommand(gu));
-        getCommand("gmc").setExecutor(new GmcCommand());
-        getCommand("gms").setExecutor(new GmsCommand());
-        getCommand("gmsp").setExecutor(new GmspCommand());
-        getCommand("gmlock").setExecutor(new GmLockCommand());
+        getCommand("gmc").setExecutor(new GmcCommand(gu));
+        getCommand("gms").setExecutor(new GmsCommand(gu));
+        getCommand("gmsp").setExecutor(new GmspCommand(gu));
+        getCommand("gmlock").setExecutor(new GmLockCommand(plugin, lockData));
         getCommand("gmlock").setTabCompleter(new GmLockTabCompleter());
-        getCommand("gmunlock").setExecutor(new GmUnlockCommand());
+        getCommand("gmunlock").setExecutor(new GmUnlockCommand(plugin, lockData));
         logger.info("Commands loaded!");
 
-        getServer().getPluginManager().registerEvents(new PlayerGamemodeChangeListener(), this);
+        getServer().getPluginManager().registerEvents(new PlayerGamemodeChangeListener(lockData), plugin);
         getLogger().info("Gamemode change event listener loaded.");
 
         new UpdateChecker(this, 118865).getVersion(version -> {

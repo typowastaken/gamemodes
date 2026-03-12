@@ -8,31 +8,36 @@ import java.io.File;
 import java.io.IOException;
 
 public class GmLockData {
-    private static File file;
-    private static FileConfiguration gmLockFile;
+    private final Gamemodes plugin;
+    public GmLockData(Gamemodes plugin) {
+        this.plugin = plugin;
+    }
+
+    private File file;
+    private FileConfiguration gmLockFile;
     //Finds or generates the GamemodeLockData File
-    public static void setup(){
-        file = new File(Gamemodes.getPlugin().getDataFolder(), "gmlockdata.yml");
+    public void setup(){
+        file = new File(plugin.getDataFolder(), "gmlockdata.yml");
         if (!file.exists()){
             try{
                 file.createNewFile();
             }catch (IOException e){
-                Gamemodes.getPlugin().getLogger().warning("Couldn't create the GamemodeLockData file, Reach out to the plugin creator @TypoWasTaken on Discord.");
+                plugin.getLogger().warning("Couldn't create the GamemodeLockData file, Reach out to the plugin creator @TypoWasTaken on Discord.");
             }
         }
         gmLockFile = YamlConfiguration.loadConfiguration(file);
     }
-    public static FileConfiguration get(){
+    public FileConfiguration get(){
         return gmLockFile;
     }
-    public static void save(){
+    public void save(){
         try{
             gmLockFile.save(file);
         }catch (IOException e){
-            Gamemodes.getPlugin().getLogger().warning("Couldn't save the GamemodeLockData file, Reach out to the plugin creator @TypoWasTaken on Discord.");
+            plugin.getLogger().warning("Couldn't save the GamemodeLockData file, Reach out to the plugin creator @TypoWasTaken on Discord.");
         }
     }
-    public static void reload(){
+    public void reload(){
         gmLockFile = YamlConfiguration.loadConfiguration(file);
     }
 }

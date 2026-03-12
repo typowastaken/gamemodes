@@ -1,6 +1,4 @@
 package com.typocreates.gamemodes.commands;
-
-import com.typocreates.gamemodes.Gamemodes;
 import com.typocreates.gamemodes.utils.GeneralUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -29,6 +27,7 @@ public class GmaCommand implements CommandExecutor {
             if (commandSender instanceof Player player) {
                 gu.sendMessage(player, targetGamemodeChangeMessage);
                 player.setGameMode(GameMode.ADVENTURE);
+                return true;
             }
             gu.sendMessage(commandSender, senderNotPlayerMessage);
             return true;
@@ -42,8 +41,7 @@ public class GmaCommand implements CommandExecutor {
                 return true;
             }
             target.setGameMode(GameMode.ADVENTURE);
-
-            gu.sendMessage(commandSender, String.format(confirmationMessage, target.getDisplayName()));
+            gu.sendMessage(commandSender, String.format(confirmationMessage, target.getName()));
             gu.sendMessage(target, targetGamemodeChangeMessage);
             return true;
         }
