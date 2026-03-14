@@ -58,10 +58,10 @@ public final class Gamemodes extends JavaPlugin {
         gmLockData.save();
 //         Loads commands
         logger.info("Loading commands!");
-        getCommand("gma").setExecutor(new GmaCommand(gu));
-        getCommand("gmc").setExecutor(new GmcCommand(gu));
-        getCommand("gms").setExecutor(new GmsCommand(gu));
-        getCommand("gmsp").setExecutor(new GmspCommand(gu));
+        getCommand("gma").setExecutor(new GmaCommand(gu, gmLockData));
+        getCommand("gmc").setExecutor(new GmcCommand(gu, gmLockData));
+        getCommand("gms").setExecutor(new GmsCommand(gu, gmLockData));
+        getCommand("gmsp").setExecutor(new GmspCommand(gu, gmLockData));
         getCommand("gmlock").setExecutor(new GmLockCommand(gu, gmLockData));
         getCommand("gmlock").setTabCompleter(new GmLockTabCompleter());
         getCommand("gmunlock").setExecutor(new GmUnlockCommand(gu, gmLockData));

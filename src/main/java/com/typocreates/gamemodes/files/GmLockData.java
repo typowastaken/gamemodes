@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 public class GmLockData {
     private final Gamemodes plugin;
@@ -27,17 +28,27 @@ public class GmLockData {
         }
         gmLockFile = YamlConfiguration.loadConfiguration(file);
     }
-    public FileConfiguration get(){
+    public FileConfiguration get() {
         return gmLockFile;
     }
-    public void save(){
-        try{
+
+    public boolean isLocked(UUID uuid) {
+        String locked = gmLockFile.getString(uuid.toString());
+        if (locked != null && locked.equalsIgnoreCase("true")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void save() {
+        try {
             gmLockFile.save(file);
-        }catch (IOException e){
+        } catch (IOException e) {
             plugin.getLogger().warning("Couldn't save the GamemodeLockData file, reach out to the plugin creator @TypoWasTaken on Discord.");
         }
     }
-    public void reload(){
+    public void reload() {
         gmLockFile = YamlConfiguration.loadConfiguration(file);
     }
 }

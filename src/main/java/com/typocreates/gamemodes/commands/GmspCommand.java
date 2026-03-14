@@ -30,7 +30,7 @@ public class GmspCommand implements CommandExecutor {
         if (strings.length == 0) {
             if (commandSender instanceof Player player) {
                 String locked = gmLockData.get().getString(player.getUniqueId().toString());
-                if (locked != null && locked.equalsIgnoreCase("true")) {
+                if (gmLockData.isLocked(player.getUniqueId())) {
                     gu.sendErrorMessage(player, unableToChangeGamemode);
                     return true;
                 }
@@ -49,8 +49,7 @@ public class GmspCommand implements CommandExecutor {
                 gu.sendErrorMessage(commandSender, playerNotFoundMessage);
                 return true;
             }
-            String locked = gmLockData.get().getString(target.getUniqueId().toString());
-            if (locked != null && locked.equalsIgnoreCase("true")) {
+            if (gmLockData.isLocked(target.getUniqueId())) {
                 gu.sendErrorMessage(commandSender, unableToChangeGamemode);
                 return true;
             }
