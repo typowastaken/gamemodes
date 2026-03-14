@@ -1,4 +1,5 @@
 package com.typocreates.gamemodes.commands;
+import com.typocreates.gamemodes.files.GmLockData;
 import com.typocreates.gamemodes.utils.GeneralUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -9,8 +10,10 @@ import org.bukkit.entity.Player;
 
 public class GmcCommand implements CommandExecutor {
     private final GeneralUtil gu;
-    public GmcCommand(GeneralUtil gu) {
+    private final GmLockData gmLockData;
+    public GmcCommand(GeneralUtil gu, GmLockData gmLockData) {
         this.gu = gu;
+        this.gmLockData = gmLockData;
     }
 
     @Override
@@ -20,11 +23,17 @@ public class GmcCommand implements CommandExecutor {
         String senderNotPlayerMessage = "You either have to be a player or target a player to use this command.";
         String playerNotFoundMessage = "That player could not be found, maybe they went offline?";
         String tooManyArgsMessage = "You can only have a maximum of 1 argument for this command.";
+        String unableToChangeGamemode = "Unable to change that users gamemode! Their gamemode is currently locked!";
 
 
 //        If there are no args, set players gamemode, if the commandSender isn't a player, send error.
         if (strings.length == 0) {
             if (commandSender instanceof Player player) {
+                String locked = gmLockData.get().getString(player.getUniqueId().toString());
+                if (locked != null && locked.equalsIgnoreCase("true")) {
+                    gu.sendErrorMessage(player, unableToChangeGamemode);
+                    return true;
+                }
                 gu.sendMessage(player, targetGamemodeChangeMessage);
                 player.setGameMode(GameMode.CREATIVE);
                 return true;
@@ -38,6 +47,11 @@ public class GmcCommand implements CommandExecutor {
             Player target = Bukkit.getServer().getPlayer(strings[0]);
             if (target == null) {
                 gu.sendErrorMessage(commandSender, playerNotFoundMessage);
+                return true;
+            }
+            String locked = gmLockData.get().getString(target.getUniqueId().toString());
+            if (locked != null && locked.equalsIgnoreCase("true")) {
+                gu.sendErrorMessage(commandSender, unableToChangeGamemode);
                 return true;
             }
             target.setGameMode(GameMode.CREATIVE);

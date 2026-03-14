@@ -8,14 +8,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 
 public class PlayerGamemodeChangeListener implements Listener {
-    private final GmLockData lockData;
-    public PlayerGamemodeChangeListener(GmLockData lockData) {
-        this.lockData = lockData;
+    private final GmLockData gmLockData;
+    public PlayerGamemodeChangeListener(GmLockData gmLockData) {
+        this.gmLockData = gmLockData;
     }
     @EventHandler
     public void onPlayerGamemodeChange(PlayerGameModeChangeEvent e){
         Player p = e.getPlayer();
-        String locked = lockData.get().getString(p.getUniqueId().toString());
+        String locked = gmLockData.get().getString(p.getUniqueId().toString());
         if (locked == null) {
             return;
         }
