@@ -4,22 +4,29 @@ import com.typocreates.gamemodes.commands.*;
 import com.typocreates.gamemodes.files.GmLockData;
 import com.typocreates.gamemodes.listeners.PlayerGamemodeChangeListener;
 import com.typocreates.gamemodes.tabcompleters.GmLockTabCompleter;
+import com.typocreates.gamemodes.utils.GeneralUtil;
 import com.typocreates.gamemodes.utils.UpdateChecker;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
-//Created with love by Typo <3
+// Created with love by Typo <3
 
 public final class Gamemodes extends JavaPlugin {
-    private static Gamemodes plugin;
+    private Gamemodes plugin;
+    private GeneralUtil gu;
+    private GmLockData gmLockData;
+
+
     @Override
     public void onEnable() {
-        // Plugin startup login
         plugin = this;
-        //Adds plugin Metrics
+        Logger logger = plugin.getLogger();
+
+//         Adds plugin Metrics
         Metrics metrics = new Metrics(this, 23009);
         metrics.addCustomChart(new Metrics.SingleLineChart("players", () -> Bukkit.getOnlinePlayers().size()));
 
@@ -40,33 +47,27 @@ public final class Gamemodes extends JavaPlugin {
             return map;
         }));
 
-        //Loads config
+//         Load config THEN set gu since it relies on the config
         saveDefaultConfig();
-        //Load the GamemodeLockData file
-        GmLockData.setup();
-        GmLockData.get().options().copyDefaults(true);
-        GmLockData.save();
-        //Loads commands
-        getCommand("gma").setExecutor(new GmaCommand());
-        getLogger().info("GMA Command loaded.");
+        gu = new GeneralUtil(this);
 
-        getCommand("gmc").setExecutor(new GmcCommand());
-        getLogger().info("GMC Command loaded.");
-
-        getCommand("gms").setExecutor(new GmsCommand());
-        getLogger().info("GMS Command loaded.");
-
-        getCommand("gmsp").setExecutor(new GmspCommand());
-        getLogger().info("GMSP Command loaded.");
-
-        getCommand("gmlock").setExecutor(new GmLockCommand());
+//         Load the GamemodeLockData file
+        gmLockData = new GmLockData(this);
+        gmLockData.setup();
+        gmLockData.get().options().copyDefaults(true);
+        gmLockData.save();
+//         Loads commands
+        logger.info("Loading commands!");
+        getCommand("gma").setExecutor(new GmaCommand(gu, gmLockData));
+        getCommand("gmc").setExecutor(new GmcCommand(gu, gmLockData));
+        getCommand("gms").setExecutor(new GmsCommand(gu, gmLockData));
+        getCommand("gmsp").setExecutor(new GmspCommand(gu, gmLockData));
+        getCommand("gmlock").setExecutor(new GmLockCommand(gu, gmLockData));
         getCommand("gmlock").setTabCompleter(new GmLockTabCompleter());
-        getLogger().info("GMLock command loaded.");
+        getCommand("gmunlock").setExecutor(new GmUnlockCommand(gu, gmLockData));
+        logger.info("Commands loaded!");
 
-        getCommand("gmunlock").setExecutor(new GmUnlockCommand());
-        getLogger().info("GMUnlock command loaded.");
-
-        getServer().getPluginManager().registerEvents(new PlayerGamemodeChangeListener(), this);
+        getServer().getPluginManager().registerEvents(new PlayerGamemodeChangeListener(gmLockData), this);
         getLogger().info("Gamemode change event listener loaded.");
 
         new UpdateChecker(this, 118865).getVersion(version -> {
@@ -77,13 +78,12 @@ public final class Gamemodes extends JavaPlugin {
             }
         });
 
-        plugin.getLogger().info("Plugin fully loaded.");
+        this.getLogger().info("Plugin fully loaded.");
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+//         Plugin shutdown logic
         plugin.getLogger().info("Plugin fully stopped.");
     }
-    public static Gamemodes getPlugin() { return plugin; }
 }

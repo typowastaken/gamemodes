@@ -6,7 +6,7 @@
 
   <groupId>com.typocreates</groupId>
   <artifactId>Gamemodes</artifactId>
-  <version>1.1.0</version>
+  <version>1.2.0[DEV]</version>
   <packaging>jar</packaging>
 
   <name>Gamemodes</name>
@@ -40,6 +40,14 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.5.0</version>
+        <configuration>
+          <outputDirectory>C:\Users\Typo\Documents\Main\MinecraftPluginDevelopmentServer\plugins</outputDirectory>
+        </configuration>
       </plugin>
     </plugins>
     <resources>
