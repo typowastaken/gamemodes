@@ -6,3 +6,10 @@
 # The sound effect will only be played for the person who ran the gamemode command. Default value = true
 # Options: true, false
 do-sound-effects: true
+
+# When changing another players gamemode, should the target player be notified when their gamemode is changed?
+# Options: true, false
+send-target-message: true
+
+# Config version:
+version: 1.0.0

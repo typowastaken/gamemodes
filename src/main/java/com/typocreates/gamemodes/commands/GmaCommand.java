@@ -54,7 +54,9 @@ public class GmaCommand implements CommandExecutor {
             }
             target.setGameMode(GameMode.ADVENTURE);
             gu.sendMessage(commandSender, String.format(confirmationMessage, target.getName()));
-            gu.sendMessage(target, targetGamemodeChangeMessage);
+            if (gu.sendTarget() && commandSender != target) {
+                gu.sendMessage(target, targetGamemodeChangeMessage);
+            }
             return true;
         }
 

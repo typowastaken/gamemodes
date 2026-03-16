@@ -1,7 +1,6 @@
 package com.typocreates.gamemodes.utils;
 
 import com.typocreates.gamemodes.Gamemodes;
-import com.typocreates.gamemodes.files.GmLockData;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -37,5 +36,9 @@ public class GeneralUtil {
         } else {
             commandSender.sendMessage(message);
         }
+    }
+
+    public boolean sendTarget() {
+        return plugin.getConfig().getBoolean("send-target-message");
     }
 }

@@ -29,7 +29,6 @@ public class GmspCommand implements CommandExecutor {
 //        If there are no args, set players gamemode, if the commandSender isn't a player, send error.
         if (strings.length == 0) {
             if (commandSender instanceof Player player) {
-                String locked = gmLockData.get().getString(player.getUniqueId().toString());
                 if (gmLockData.isLocked(player.getUniqueId())) {
                     gu.sendErrorMessage(player, unableToChangeGamemode);
                     return true;
@@ -55,7 +54,9 @@ public class GmspCommand implements CommandExecutor {
             }
             target.setGameMode(GameMode.SPECTATOR);
             gu.sendMessage(commandSender, String.format(confirmationMessage, target.getName()));
-            gu.sendMessage(target, targetGamemodeChangeMessage);
+            if (gu.sendTarget() && commandSender != target) {
+                gu.sendMessage(target, targetGamemodeChangeMessage);
+            }
             return true;
         }
 
