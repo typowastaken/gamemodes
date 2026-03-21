@@ -4,5 +4,12 @@
 
 # Do you want to play a sound whenever you switch someone's gamemode?
 # The sound effect will only be played for the person who ran the gamemode command. Default value = true
-# Make sure to set this value to either true or false or the plugin might not work!
+# Options: true, false
 do-sound-effects: true
+
+# When changing another players gamemode, should the target player be notified when their gamemode is changed?
+# Options: true, false
+send-target-message: true
+
+# Config version:
+version: 1.0.0
