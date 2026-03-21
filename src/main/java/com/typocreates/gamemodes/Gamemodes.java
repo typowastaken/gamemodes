@@ -68,17 +68,21 @@ public final class Gamemodes extends JavaPlugin {
         logger.info("Commands loaded!");
 
         getServer().getPluginManager().registerEvents(new PlayerGamemodeChangeListener(gmLockData), this);
-        getLogger().info("Gamemode change event listener loaded.");
+        logger.info("Gamemode change event listener loaded.");
 
         new UpdateChecker(this, 118865).getVersion(version -> {
             if (this.getDescription().getVersion().equals(version)) {
-                getLogger().info("Update check complete, no need updates needed.");
+                logger.info("Update check complete, no need updates needed.");
             } else {
-                getLogger().info("Update check complete, updates are needed! Please update here: https://modrinth.com/project/CD4bmArk");
+                logger.info("Update check complete, updates are needed! Please update here: https://modrinth.com/project/CD4bmArk");
             }
         });
 
-        this.getLogger().info("Plugin fully loaded.");
+        logger.info("Plugin fully loaded.");
+
+        if (!getConfig().isSet("send-target-message")) {
+            logger.warning("The default config for the plugin has changed and now contains a new option called 'send-target-message', please set this option in the config or grab the updated config from the plugin page: https://modrinth.com/project/CD4bmArk");
+        }
     }
 
     @Override

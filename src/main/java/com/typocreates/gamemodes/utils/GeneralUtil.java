@@ -39,6 +39,6 @@ public class GeneralUtil {
     }
 
     public boolean sendTarget() {
-        return plugin.getConfig().getBoolean("send-target-message");
+        return plugin.getConfig().getBoolean("send-target-message", true);
     }
 }
