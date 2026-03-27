@@ -7,11 +7,13 @@ import org.bukkit.command.CommandSender;
 
 public class GmreloadCommand implements CommandExecutor {
     private final Gamemodes plugin;
-    GmreloadCommand(Gamemodes plugin) {
+    public GmreloadCommand(Gamemodes plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+        plugin.reloadConfig();
+        return true;
     }
 }
