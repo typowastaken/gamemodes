@@ -2,8 +2,8 @@
 # Report bugs to me on Discord or Spigot <3 (@TypoWasTaken).#
 
 
-# Do you want to play a sound whenever you switch someone's gamemode?
-# The sound effect will only be played for the person who ran the gamemode command. Default value = true
+# Do you want to play a sound whenever you receive a message such as when you switch someone's gamemode?
+# The sound effect will be played to anyone who receives a message. Default value = true
 # Options: true, false
 do-sound-effects: true
 
@@ -12,4 +12,4 @@ do-sound-effects: true
 send-target-message: true
 
 # Config version:
-version: 1.0.0
+version: 1.0.1

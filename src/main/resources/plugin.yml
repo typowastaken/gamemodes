@@ -24,6 +24,9 @@ commands:
   gmunlock:
     description: Allows the targeted player to switch gamemodes again after having the /gmlock command used on them.
     permission: gamemodes.gmunlock
+  gmreload:
+    description: Reloads the plugin config!
+    permission: gamemodes.reload
 
 permissions:
   gamemodes.all:
@@ -51,3 +54,6 @@ permissions:
 
   gamemodes.gmunlock:
     description: Allows the player to use the /gmunlock <player> command.
+
+  gamemodes.reload:
+    description: Allows the player to reload the plugin config!
