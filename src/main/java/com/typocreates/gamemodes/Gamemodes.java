@@ -71,13 +71,7 @@ public final class Gamemodes extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerGamemodeChangeListener(gmLockData), this);
         logger.info("Gamemode change event listener loaded.");
 
-        new UpdateChecker(this, 118865).getVersion(version -> {
-            if (this.getDescription().getVersion().equals(version)) {
-                logger.info("Update check complete, no need updates needed.");
-            } else {
-                logger.info("Update check complete, updates are needed! Please update here: https://modrinth.com/project/CD4bmArk");
-            }
-        });
+        new UpdateChecker(this, "CD4bmArk").checkUpdate();
 
         logger.info("Plugin fully loaded.");
 
