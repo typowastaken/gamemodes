@@ -2,6 +2,7 @@ package com.typocreates.gamemodes.utils;
 
 import com.typocreates.gamemodes.Gamemodes;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -36,6 +37,10 @@ public class GeneralUtil {
         } else {
             commandSender.sendMessage(message);
         }
+    }
+
+    public boolean isGamemodeBlocked(Player p, GameMode gm) {
+        return p.hasPermission("gamemodes.blockaccess." + gm.toString().toLowerCase());
     }
 
     public boolean sendTarget() {

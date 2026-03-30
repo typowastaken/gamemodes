@@ -18,12 +18,14 @@ public class GmcCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        String targetGamemodeChangeMessage = "Your gamemode has been set to Creative.";
-        String confirmationMessage = "%s's gamemode has been set to Creative.";
+        String gamemode = "Creative";
+        String targetGamemodeChangeMessage = "Your gamemode has been set to {gm}.".replace("{gm}", gamemode);
+        String confirmationMessage = "%s's gamemode has been set to {gm}.".replace("{gm}", gamemode);
         String senderNotPlayerMessage = "You either have to be a player or target a player to use this command.";
         String playerNotFoundMessage = "That player could not be found, maybe they went offline?";
         String tooManyArgsMessage = "You can only have a maximum of 1 argument for this command.";
         String unableToChangeGamemode = "Unable to change that users gamemode! Their gamemode is currently locked!";
+        String gamemodeChangeNotAllowed = "That user isn't allowed in {gm}!".replace("{gm}", gamemode);
 
 
 //        If there are no args, set players gamemode, if the commandSender isn't a player, send error.
@@ -31,6 +33,10 @@ public class GmcCommand implements CommandExecutor {
             if (commandSender instanceof Player player) {
                 if (gmLockData.isLocked(player.getUniqueId())) {
                     gu.sendErrorMessage(player, unableToChangeGamemode);
+                    return true;
+                }
+                if (gu.isGamemodeBlocked(player, GameMode.CREATIVE)) {
+                    gu.sendErrorMessage(commandSender, gamemodeChangeNotAllowed);
                     return true;
                 }
                 gu.sendMessage(player, targetGamemodeChangeMessage);
@@ -50,6 +56,10 @@ public class GmcCommand implements CommandExecutor {
             }
             if (gmLockData.isLocked(target.getUniqueId())) {
                 gu.sendErrorMessage(commandSender, unableToChangeGamemode);
+                return true;
+            }
+            if (gu.isGamemodeBlocked(target, GameMode.CREATIVE)) {
+                gu.sendErrorMessage(commandSender, gamemodeChangeNotAllowed);
                 return true;
             }
             target.setGameMode(GameMode.CREATIVE);
