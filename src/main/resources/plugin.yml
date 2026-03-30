@@ -57,3 +57,19 @@ permissions:
 
   gamemodes.reload:
     description: Allows the player to reload the plugin config!
+
+  gamemodes.blockaccess.adventure:
+    description: Stops the user from being able to switch to adventure mode.
+    default: false
+
+  gamemodes.blockaccess.creative:
+    description: Stops the user from being able to switch to creative mode.
+    default: false
+
+  gamemodes.blockaccess.survival:
+    description: Stops the user from being able to switch to survival mode.
+    default: false
+
+  gamemodes.blockaccess.spectator:
+    description: Stops the user from being able to switch to spectator mode.
+    default: false
