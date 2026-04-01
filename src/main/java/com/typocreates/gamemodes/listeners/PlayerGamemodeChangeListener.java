@@ -2,7 +2,6 @@ package com.typocreates.gamemodes.listeners;
 
 import com.typocreates.gamemodes.files.GmLockData;
 import com.typocreates.gamemodes.utils.GeneralUtil;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
