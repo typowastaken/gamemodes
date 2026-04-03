@@ -7,6 +7,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.util.List;
 
 public class GmLockCommand implements CommandExecutor {
@@ -18,7 +20,7 @@ public class GmLockCommand implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+    public boolean onCommand(@NonNull CommandSender commandSender, @NonNull Command command, @NonNull String s, String[] strings) {
         if (strings.length == 0) {
             gu.sendErrorMessage(commandSender, "You must supply a username and a gamemode.");
             return true;
