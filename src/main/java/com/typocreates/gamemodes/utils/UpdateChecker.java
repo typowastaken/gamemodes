@@ -1,32 +1,33 @@
 package com.typocreates.gamemodes.utils;
 
 import com.typocreates.gamemodes.Gamemodes;
-import org.bukkit.Bukkit;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.Scanner;
-import java.util.function.Consumer;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.logging.Logger;
 
 public class UpdateChecker {
 
     private final Gamemodes plugin;
-    private final int resourceId;
+    private final String projectId;
 
-    public UpdateChecker(Gamemodes plugin, int resourceId) {
+    public UpdateChecker(Gamemodes plugin, String projectId) {
         this.plugin = plugin;
-        this.resourceId = resourceId;
+        this.projectId = projectId;
     }
-    public void getVersion(final Consumer<String> consumer) {
-        Bukkit.getScheduler().runTaskAsynchronously(this.plugin, () -> {
-            try (InputStream is = new URL("https://api.spigotmc.org/legacy/update.php?resource=" + this.resourceId + "/~").openStream(); Scanner scann = new Scanner(is)) {
-                if (scann.hasNext()) {
-                    consumer.accept(scann.next());
-                }
-            } catch (IOException e) {
-                plugin.getLogger().info("Unable to check for updates: " + e.getMessage());
-            }
-        });
+
+    public void checkUpdate() {
+        Logger logger = plugin.getLogger();
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://api.modrinth.com/v2/project/{id}/version".replace("{id}", projectId)))
+                .build();
+
+        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .thenAccept(logger::info)
+                .join();
     }
 }
