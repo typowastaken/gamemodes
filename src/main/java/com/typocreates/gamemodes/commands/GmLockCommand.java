@@ -42,6 +42,10 @@ public class GmLockCommand implements CommandExecutor {
                 gu.sendErrorMessage(commandSender, "The gamemode '" + gamemode + "' doesn't exist.");
                 return true;
             }
+            if (gu.isGamemodeBlocked(target, GameMode.valueOf(gamemode.toUpperCase()))) {
+                gu.sendErrorMessage(commandSender, "Unable to lock that users gamemode! They aren't allowed in that gamemode!");
+                return true;
+            }
 
             if (gmLockData.get().getString(target.getUniqueId().toString()) != null) {
                 gmLockData.get().set(target.getUniqueId().toString(), null);
