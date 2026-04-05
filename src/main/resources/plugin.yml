@@ -4,7 +4,7 @@ main: com.typocreates.gamemodes.Gamemodes
 api-version: '1.20'
 authors: [Typo]
 description: Adds shortcuts and permissions for the /gamemode command.
-website: https://typocreates.com/plugins/gamemodes/
+website: https://modrinth.com/project/CD4bmArk
 commands:
   gma:
     description: Sets the targeted player to Adventure mode, the default player is the command executor.
