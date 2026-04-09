@@ -1,7 +1,7 @@
 Here is the modrinth page to download the plugin! :D
 https://modrinth.com/project/CD4bmArk
 
-If you encounter any issues in the plugin, please report them using Github Issues or send me a DM on Discord! @TypoWasTaken :)
+If you encounter any issues in the plugin, please report them using Github Issues or send me a DM on Fluxer! @typo#0001 :)
 
 Future plans:
 - Move the GMLock data over to SQLite
