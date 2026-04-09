@@ -5,6 +5,7 @@ import com.typocreates.gamemodes.utils.GeneralUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class GmreloadCommand implements CommandExecutor {
     private final Gamemodes plugin;
@@ -15,7 +16,7 @@ public class GmreloadCommand implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+    public boolean onCommand(@NonNull CommandSender commandSender, @NonNull Command command, @NonNull String s, String @NonNull [] strings) {
         plugin.reloadConfig();
 
         gu.sendMessage(commandSender, "Config reloaded!");

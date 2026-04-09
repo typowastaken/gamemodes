@@ -3,6 +3,7 @@ package com.typocreates.gamemodes;
 import com.typocreates.gamemodes.commands.*;
 import com.typocreates.gamemodes.files.GmLockData;
 import com.typocreates.gamemodes.listeners.PlayerGamemodeChangeListener;
+import com.typocreates.gamemodes.listeners.PlayerJoinListener;
 import com.typocreates.gamemodes.tabcompleters.GmLockTabCompleter;
 import com.typocreates.gamemodes.utils.GeneralUtil;
 import com.typocreates.gamemodes.utils.UpdateChecker;
@@ -68,8 +69,11 @@ public final class Gamemodes extends JavaPlugin {
         getCommand("Gmreload").setExecutor(new GmreloadCommand(plugin, gu));
         logger.info("Commands loaded!");
 
-        getServer().getPluginManager().registerEvents(new PlayerGamemodeChangeListener(gmLockData), this);
+        getServer().getPluginManager().registerEvents(new PlayerGamemodeChangeListener(gu, gmLockData), this);
         logger.info("Gamemode change event listener loaded.");
+
+        getServer().getPluginManager().registerEvents(new PlayerJoinListener(this, gu), this);
+        logger.info("Player join listener loaded.");
 
         new UpdateChecker(this, 118865).getVersion(version -> {
             if (this.getDescription().getVersion().equals(version)) {
