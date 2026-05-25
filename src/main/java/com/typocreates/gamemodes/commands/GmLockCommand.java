@@ -7,6 +7,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.util.List;
 
 public class GmLockCommand implements CommandExecutor {
@@ -18,7 +20,7 @@ public class GmLockCommand implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+    public boolean onCommand(@NonNull CommandSender commandSender, @NonNull Command command, @NonNull String s, String[] strings) {
         if (strings.length == 0) {
             gu.sendErrorMessage(commandSender, "You must supply a username and a gamemode.");
             return true;
@@ -38,6 +40,10 @@ public class GmLockCommand implements CommandExecutor {
             String gamemode = strings[1];
             if (!gamemodes.contains(gamemode.toUpperCase())) {
                 gu.sendErrorMessage(commandSender, "The gamemode '" + gamemode + "' doesn't exist.");
+                return true;
+            }
+            if (gu.isGamemodeBlocked(target, GameMode.valueOf(gamemode.toUpperCase()))) {
+                gu.sendErrorMessage(commandSender, "Unable to lock that users gamemode! They aren't allowed in that gamemode!");
                 return true;
             }
 

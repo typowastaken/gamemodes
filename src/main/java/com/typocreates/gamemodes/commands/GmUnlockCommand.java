@@ -6,6 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class GmUnlockCommand implements CommandExecutor {
     private final GeneralUtil gu;
@@ -16,7 +17,7 @@ public class GmUnlockCommand implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+    public boolean onCommand(@NonNull CommandSender commandSender, @NonNull Command command, @NonNull String s, String[] strings) {
         String playerName = strings[0];
         if (playerName == null) { playerName = commandSender.getName(); }
         Player target = Bukkit.getServer().getPlayer(playerName);

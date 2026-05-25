@@ -1,10 +1,10 @@
 name: Gamemodes
-version: '1.2.0[Dev]'
+version: '1.4.1[Dev]'
 main: com.typocreates.gamemodes.Gamemodes
 api-version: '1.20'
 authors: [Typo]
 description: Adds shortcuts and permissions for the /gamemode command.
-website: https://typocreates.com/plugins/gamemodes/
+website: https://modrinth.com/project/CD4bmArk
 commands:
   gma:
     description: Sets the targeted player to Adventure mode, the default player is the command executor.
@@ -24,6 +24,9 @@ commands:
   gmunlock:
     description: Allows the targeted player to switch gamemodes again after having the /gmlock command used on them.
     permission: gamemodes.gmunlock
+  gmreload:
+    description: Reloads the plugin config!
+    permission: gamemodes.reload
 
 permissions:
   gamemodes.all:
@@ -51,3 +54,22 @@ permissions:
 
   gamemodes.gmunlock:
     description: Allows the player to use the /gmunlock <player> command.
+
+  gamemodes.reload:
+    description: Allows the player to reload the plugin config!
+
+  gamemodes.blockaccess.adventure:
+    description: Stops the user from being able to switch to adventure mode.
+    default: false
+
+  gamemodes.blockaccess.creative:
+    description: Stops the user from being able to switch to creative mode.
+    default: false
+
+  gamemodes.blockaccess.survival:
+    description: Stops the user from being able to switch to survival mode.
+    default: false
+
+  gamemodes.blockaccess.spectator:
+    description: Stops the user from being able to switch to spectator mode.
+    default: false

@@ -18,26 +18,32 @@ public class GmcCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        String targetGamemodeChangeMessage = "Your gamemode has been set to Creative.";
-        String confirmationMessage = "%s's gamemode has been set to Creative.";
-        String senderNotPlayerMessage = "You either have to be a player or target a player to use this command.";
-        String playerNotFoundMessage = "That player could not be found, maybe they went offline?";
-        String tooManyArgsMessage = "You can only have a maximum of 1 argument for this command.";
-        String unableToChangeGamemode = "Unable to change that users gamemode! Their gamemode is currently locked!";
+        String gm = "Creative";
+        String targetGamemodeChangeMsg = gu.getTargetGamemodeChangeMsg(gm);
+        String confirmationMsg = gu.getConfirmationMsg(gm);
+        String senderNotPlayerMsg = gu.getSenderNotPlayerMsg();
+        String playerNotFoundMsg = gu.getPlayerNotFoundMsg();
+        String tooManyArgsMsg = gu.getTooManyArgsMsg();
+        String unableToChangeGamemodeMsg = gu.getUnableToChangeGamemodeMsg();
+        String gamemodeChangeNotAllowedMsg = gu.getGamemodeChangeNotAllowedMsg(gm);
 
 
 //        If there are no args, set players gamemode, if the commandSender isn't a player, send error.
         if (strings.length == 0) {
             if (commandSender instanceof Player player) {
                 if (gmLockData.isLocked(player.getUniqueId())) {
-                    gu.sendErrorMessage(player, unableToChangeGamemode);
+                    gu.sendErrorMessage(player, unableToChangeGamemodeMsg);
                     return true;
                 }
-                gu.sendMessage(player, targetGamemodeChangeMessage);
+                if (gu.isGamemodeBlocked(player, GameMode.CREATIVE)) {
+                    gu.sendErrorMessage(commandSender, gamemodeChangeNotAllowedMsg);
+                    return true;
+                }
+                gu.sendMessage(player, targetGamemodeChangeMsg);
                 player.setGameMode(GameMode.CREATIVE);
                 return true;
             }
-            gu.sendMessage(commandSender, senderNotPlayerMessage);
+            gu.sendMessage(commandSender, senderNotPlayerMsg);
             return true;
         }
 
@@ -45,23 +51,27 @@ public class GmcCommand implements CommandExecutor {
         if (strings.length == 1) {
             Player target = Bukkit.getServer().getPlayer(strings[0]);
             if (target == null) {
-                gu.sendErrorMessage(commandSender, playerNotFoundMessage);
+                gu.sendErrorMessage(commandSender, playerNotFoundMsg);
                 return true;
             }
             if (gmLockData.isLocked(target.getUniqueId())) {
-                gu.sendErrorMessage(commandSender, unableToChangeGamemode);
+                gu.sendErrorMessage(commandSender, unableToChangeGamemodeMsg);
+                return true;
+            }
+            if (gu.isGamemodeBlocked(target, GameMode.CREATIVE)) {
+                gu.sendErrorMessage(commandSender, gamemodeChangeNotAllowedMsg);
                 return true;
             }
             target.setGameMode(GameMode.CREATIVE);
-            gu.sendMessage(commandSender, String.format(confirmationMessage, target.getName()));
+            gu.sendMessage(commandSender, String.format(confirmationMsg, target.getName()));
             if (gu.sendTarget() && commandSender != target) {
-                gu.sendMessage(target, targetGamemodeChangeMessage);
+                gu.sendMessage(target, targetGamemodeChangeMsg);
             }
             return true;
         }
 
 //        If there is more than one arg, send error
-        gu.sendErrorMessage(commandSender, tooManyArgsMessage);
+        gu.sendErrorMessage(commandSender, tooManyArgsMsg);
         return true;
     }
 }
