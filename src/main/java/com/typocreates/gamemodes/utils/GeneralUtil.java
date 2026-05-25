@@ -46,4 +46,41 @@ public class GeneralUtil {
     public boolean sendTarget() {
         return plugin.getConfig().getBoolean("send-target-message", true);
     }
+
+    // Gamemode change strings
+    String targetGamemodeChangeMsg = "Your gamemode has been set to {gm}.";
+    String confirmationMsg = "%s's gamemode has been set to {gm}.";
+    String senderNotPlayerMsg = "You either have to be a player or target a player to use this command.";
+    String playerNotFoundMsg = "That player could not be found, maybe they went offline?";
+    String tooManyArgsMsg = "You can only have a maximum of 1 argument for this command.";
+    String unableToChangeGamemodeMsg = "Unable to change that users gamemode! Their gamemode is currently locked!";
+    String gamemodeChangeNotAllowedMsg = "That user isn't allowed in {gm}!";
+
+    public String getTargetGamemodeChangeMsg(String gm) {
+        return targetGamemodeChangeMsg.replace("{gm}", gm);
+    }
+
+    public String getConfirmationMsg(String gm) {
+        return confirmationMsg.replace("{gm}", gm);
+    }
+
+    public String getSenderNotPlayerMsg() {
+        return senderNotPlayerMsg;
+    }
+
+    public String getPlayerNotFoundMsg() {
+        return playerNotFoundMsg;
+    }
+
+    public String getTooManyArgsMsg() {
+        return tooManyArgsMsg;
+    }
+
+    public String getUnableToChangeGamemodeMsg() {
+        return unableToChangeGamemodeMsg;
+    }
+
+    public String getGamemodeChangeNotAllowedMsg(String gm) {
+        return gamemodeChangeNotAllowedMsg.replace("{gm}", gm);
+    }
 }
