@@ -75,7 +75,7 @@ public final class Gamemodes extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(this, gu), this);
         logger.info("Player join listener loaded.");
 
-        new UpdateChecker(this, "CD4bmArk").checkUpdate();
+        new UpdateChecker(this).checkUpdate();
 
         logger.info("Plugin fully loaded.");
 
