@@ -56,12 +56,12 @@ public class GeneralUtil {
     String unableToChangeGamemodeMsg = "Unable to change that users gamemode! Their gamemode is currently locked!";
     String gamemodeChangeNotAllowedMsg = "That user isn't allowed in {gm}!";
 
-    public String getTargetGamemodeChangeMsg() {
-        return targetGamemodeChangeMsg;
+    public String getTargetGamemodeChangeMsg(String gm) {
+        return targetGamemodeChangeMsg.replace("{gm}", gm);
     }
 
-    public String getConfirmationMsg() {
-        return confirmationMsg;
+    public String getConfirmationMsg(String gm) {
+        return confirmationMsg.replace("{gm}", gm);
     }
 
     public String getSenderNotPlayerMsg() {
@@ -80,7 +80,7 @@ public class GeneralUtil {
         return unableToChangeGamemodeMsg;
     }
 
-    public String getGamemodeChangeNotAllowedMsg() {
-        return gamemodeChangeNotAllowedMsg;
+    public String getGamemodeChangeNotAllowedMsg(String gm) {
+        return gamemodeChangeNotAllowedMsg.replace("{gm}", gm);
     }
 }

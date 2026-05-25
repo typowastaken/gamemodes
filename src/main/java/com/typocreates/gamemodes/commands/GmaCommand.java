@@ -18,14 +18,14 @@ public class GmaCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        String gamemode = "Adventure";
-        String targetGamemodeChangeMsg = gu.getTargetGamemodeChangeMsg().replace("{gm}", gamemode);
-        String confirmationMsg = gu.getConfirmationMsg().replace("{gm}", gamemode);
+        String gm = "Adventure";
+        String targetGamemodeChangeMsg = gu.getTargetGamemodeChangeMsg(gm);
+        String confirmationMsg = gu.getConfirmationMsg(gm);
         String senderNotPlayerMsg = gu.getSenderNotPlayerMsg();
         String playerNotFoundMsg = gu.getPlayerNotFoundMsg();
         String tooManyArgsMsg = gu.getTooManyArgsMsg();
         String unableToChangeGamemodeMsg = gu.getUnableToChangeGamemodeMsg();
-        String gamemodeChangeNotAllowedMsg = gu.getGamemodeChangeNotAllowedMsg().replace("{gm}", gamemode);
+        String gamemodeChangeNotAllowedMsg = gu.getGamemodeChangeNotAllowedMsg(gm);
 
 
 //        If there are no args, set players gamemode, if the commandSender isn't a player, send error.
