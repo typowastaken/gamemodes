@@ -69,11 +69,10 @@ public final class Gamemodes extends JavaPlugin {
         getCommand("Gmreload").setExecutor(new GmreloadCommand(plugin, gu));
         logger.info("Commands loaded!");
 
+        logger.info("Loading event listeners...");
         getServer().getPluginManager().registerEvents(new PlayerGamemodeChangeListener(gu, gmLockData), this);
-        logger.info("Gamemode change event listener loaded.");
-
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(this, gu), this);
-        logger.info("Player join listener loaded.");
+        logger.info("Event listeners loaded!");
 
         new UpdateChecker(this).checkUpdate();
 
