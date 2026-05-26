@@ -48,39 +48,31 @@ public class GeneralUtil {
     }
 
     // Gamemode change strings
-    String targetGamemodeChangeMsg = "Your gamemode has been set to {gm}.";
-    String confirmationMsg = "%s's gamemode has been set to {gm}.";
-    String senderNotPlayerMsg = "You either have to be a player or target a player to use this command.";
-    String playerNotFoundMsg = "That player could not be found, maybe they went offline?";
-    String tooManyArgsMsg = "You can only have a maximum of 1 argument for this command.";
-    String unableToChangeGamemodeMsg = "Unable to change that users gamemode! Their gamemode is currently locked!";
-    String gamemodeChangeNotAllowedMsg = "That user isn't allowed in {gm}!";
-
     public String getTargetGamemodeChangeMsg(String gm) {
-        return targetGamemodeChangeMsg.replace("{gm}", gm);
+        return "Your gamemode has been set to {gm}.".replace("{gm}", gm);
     }
 
     public String getConfirmationMsg(String gm) {
-        return confirmationMsg.replace("{gm}", gm);
+        return "%s's gamemode has been set to {gm}.".replace("{gm}", gm);
     }
 
     public String getSenderNotPlayerMsg() {
-        return senderNotPlayerMsg;
+        return "You either have to be a player or target a player to use this command.";
     }
 
     public String getPlayerNotFoundMsg() {
-        return playerNotFoundMsg;
+        return "That player could not be found, maybe they went offline?";
     }
 
     public String getTooManyArgsMsg() {
-        return tooManyArgsMsg;
+        return "You can only have a maximum of 1 argument for this command.";
     }
 
     public String getUnableToChangeGamemodeMsg() {
-        return unableToChangeGamemodeMsg;
+        return "Unable to change that users gamemode! Their gamemode is currently locked!";
     }
 
     public String getGamemodeChangeNotAllowedMsg(String gm) {
-        return gamemodeChangeNotAllowedMsg.replace("{gm}", gm);
+        return "That user isn't allowed in {gm}!".replace("{gm}", gm);
     }
 }
