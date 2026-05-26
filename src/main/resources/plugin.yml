@@ -30,7 +30,7 @@ commands:
 
 permissions:
   gamemodes.all:
-    description: Allows the player to use all the gamemode commands.
+    description: Allows the player to use all the gamemode swap commands.
     children:
       gamemodes.gma: true
       gamemodes.gmc: true
