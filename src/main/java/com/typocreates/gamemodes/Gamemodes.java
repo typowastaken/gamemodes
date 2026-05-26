@@ -28,6 +28,7 @@ public final class Gamemodes extends JavaPlugin {
         Logger logger = plugin.getLogger();
 
 //         Adds plugin Metrics
+        logger.info("Enabling metrics...");
         Metrics metrics = new Metrics(this, 23009);
         metrics.addCustomChart(new Metrics.SingleLineChart("players", () -> Bukkit.getOnlinePlayers().size()));
 
@@ -58,7 +59,7 @@ public final class Gamemodes extends JavaPlugin {
         gmLockData.get().options().copyDefaults(true);
         gmLockData.save();
 //         Loads commands
-        logger.info("Loading commands!");
+        logger.info("Loading commands...");
         getCommand("gma").setExecutor(new GmaCommand(gu, gmLockData));
         getCommand("gmc").setExecutor(new GmcCommand(gu, gmLockData));
         getCommand("gms").setExecutor(new GmsCommand(gu, gmLockData));
@@ -66,7 +67,7 @@ public final class Gamemodes extends JavaPlugin {
         getCommand("gmlock").setExecutor(new GmLockCommand(gu, gmLockData));
         getCommand("gmlock").setTabCompleter(new GmLockTabCompleter());
         getCommand("gmunlock").setExecutor(new GmUnlockCommand(gu, gmLockData));
-        getCommand("Gmreload").setExecutor(new GmreloadCommand(plugin, gu));
+        getCommand("gmreload").setExecutor(new GmreloadCommand(plugin, gu));
         logger.info("Commands loaded!");
 
         logger.info("Loading event listeners...");

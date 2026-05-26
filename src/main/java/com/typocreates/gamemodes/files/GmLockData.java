@@ -17,12 +17,12 @@ public class GmLockData {
     private File file;
     private FileConfiguration gmLockFile;
 //    Finds or generates the GamemodeLockData File
-    public void setup(){
+    public void setup() {
         file = new File(plugin.getDataFolder(), "gmlockdata.yml");
-        if (!file.exists()){
-            try{
+        if (!file.exists()) {
+            try {
                 file.createNewFile();
-            }catch (IOException e){
+            } catch (IOException e) {
                 plugin.getLogger().warning("Couldn't create the GamemodeLockData file, reach out to the plugin creator @TypoWasTaken on Discord.");
             }
         }
