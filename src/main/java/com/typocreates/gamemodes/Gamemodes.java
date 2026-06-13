@@ -1,7 +1,7 @@
 package com.typocreates.gamemodes;
 
 import com.typocreates.gamemodes.commands.*;
-import com.typocreates.gamemodes.files.GmLockData;
+import com.typocreates.gamemodes.data.GmLockData;
 import com.typocreates.gamemodes.listeners.PlayerGamemodeChangeListener;
 import com.typocreates.gamemodes.listeners.PlayerJoinListener;
 import com.typocreates.gamemodes.tabcompleters.GmLockTabCompleter;

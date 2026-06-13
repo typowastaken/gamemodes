@@ -1,4 +1,4 @@
-package com.typocreates.gamemodes.files;
+package com.typocreates.gamemodes.data;
 
 import com.typocreates.gamemodes.Gamemodes;
 import org.bukkit.configuration.file.FileConfiguration;

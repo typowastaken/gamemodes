@@ -1,5 +1,5 @@
 package com.typocreates.gamemodes.commands;
-import com.typocreates.gamemodes.files.GmLockData;
+import com.typocreates.gamemodes.data.GmLockData;
 import com.typocreates.gamemodes.utils.GeneralUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
