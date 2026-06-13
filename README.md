@@ -1,5 +1,6 @@
 Here is the modrinth page to download the plugin! :D
 https://modrinth.com/project/CD4bmArk
+---
 
 If you encounter any issues in the plugin, please report them using Github Issues or send me a DM on Fluxer! @typo#0001 :)
 
@@ -8,7 +9,14 @@ Future plans:
 
 It may take awhile for things to get added as I've been really busy recently but any major issues should be fixed ASAP
 
+This plugin *loosely* follows semver for it's version number
+---
+For the most part, the only things I do differently are:
+- When an update is small enough, even if it includes a new feature, I will bump the minor number
+- I don't version development releases other than adding a [Dev] tag
 
+
+---
 
 This project is currently **source-available** and all rights are reserved
 
