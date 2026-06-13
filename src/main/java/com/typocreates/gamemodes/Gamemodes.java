@@ -1,7 +1,7 @@
 package com.typocreates.gamemodes;
 
 import com.typocreates.gamemodes.commands.*;
-import com.typocreates.gamemodes.files.GmLockData;
+import com.typocreates.gamemodes.data.GmLockData;
 import com.typocreates.gamemodes.listeners.PlayerGamemodeChangeListener;
 import com.typocreates.gamemodes.listeners.PlayerJoinListener;
 import com.typocreates.gamemodes.tabcompleters.GmLockTabCompleter;
@@ -20,6 +20,7 @@ public final class Gamemodes extends JavaPlugin {
     private Gamemodes plugin;
     private GeneralUtil gu;
     private GmLockData gmLockData;
+    private UpdateChecker updateChecker;
 
 
     @Override
@@ -52,6 +53,7 @@ public final class Gamemodes extends JavaPlugin {
 //         Load config THEN set gu since it relies on the config
         saveDefaultConfig();
         gu = new GeneralUtil(this);
+        updateChecker = new UpdateChecker(this);
 
 //         Load the GamemodeLockData file
         gmLockData = new GmLockData(this);
@@ -72,10 +74,10 @@ public final class Gamemodes extends JavaPlugin {
 
         logger.info("Loading event listeners...");
         getServer().getPluginManager().registerEvents(new PlayerGamemodeChangeListener(gu, gmLockData), this);
-        getServer().getPluginManager().registerEvents(new PlayerJoinListener(this, gu), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinListener(this, gu, updateChecker), this);
         logger.info("Event listeners loaded!");
 
-        new UpdateChecker(this).checkUpdate();
+        updateChecker.checkUpdate();
 
         logger.info("Plugin fully loaded.");
 

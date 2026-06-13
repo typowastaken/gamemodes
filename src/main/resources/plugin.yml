@@ -37,6 +37,9 @@ permissions:
       gamemodes.gms: true
       gamemodes.gmsp: true
 
+  gamemodes.notifyupdate:
+    description: Players with this permission will be notified in chat upon joining when an update is available.
+
   gamemodes.gma:
     description: Allows the player to use the /gma <player> command.
 

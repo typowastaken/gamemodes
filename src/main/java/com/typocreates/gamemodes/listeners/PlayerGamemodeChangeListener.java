@@ -1,6 +1,6 @@
 package com.typocreates.gamemodes.listeners;
 
-import com.typocreates.gamemodes.files.GmLockData;
+import com.typocreates.gamemodes.data.GmLockData;
 import com.typocreates.gamemodes.utils.GeneralUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
