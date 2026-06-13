@@ -12,7 +12,7 @@ It may take awhile for things to get added as I've been really busy recently but
 This plugin *loosely* follows semver for it's version number
 ---
 For the most part, the only things I do differently are:
-- When an update is small enough, even if it includes a new feature, I will bump the minor number
+- I might bump the patch number instead of the minor number for non-bug fixes if I think the changes are small enough
 - I don't version development releases other than adding a [Dev] tag
 
 
