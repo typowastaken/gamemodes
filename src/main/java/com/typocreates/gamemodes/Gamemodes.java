@@ -55,6 +55,19 @@ public final class Gamemodes extends JavaPlugin {
         gu = new GeneralUtil(this);
         updateChecker = new UpdateChecker(this);
 
+//        Add config statistics
+        metrics.addCustomChart(new Metrics.SimplePie("sounds_enabled", () -> {
+            return getConfig().getString("do-sound-effects");
+        }));
+
+        metrics.addCustomChart(new Metrics.SimplePie("target_message_enabled", () -> {
+            return getConfig().getString("send-target-message");
+        }));
+
+        metrics.addCustomChart(new Metrics.SimplePie("config_version", () -> {
+            return getConfig().getString("version");
+        }));
+
 //         Load the GamemodeLockData file
         gmLockData = new GmLockData(this);
         gmLockData.setup();
