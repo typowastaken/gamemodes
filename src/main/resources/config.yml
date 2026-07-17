@@ -3,13 +3,17 @@
 
 
 # Do you want to play a sound whenever you receive a message such as when you switch someone's gamemode?
-# The sound effect will be played to anyone who receives a message. Default value = true
+# The sound effect will be played to anyone who receives a message. This is enabled by default.
 # Options: true, false
 do-sound-effects: true
 
-# When changing another players gamemode, should the target player be notified when their gamemode is changed?
+# When changing another players gamemode, should the target player be notified when their gamemode is changed? This is enabled by default.
 # Options: true, false
 send-target-message: true
 
+# Do you want to enable update checking? This is enabled by default.
+# Options: true, false
+enable-update-checker: true
+
 # Config version:
-version: 1.0.1
+version: 1.0.2
