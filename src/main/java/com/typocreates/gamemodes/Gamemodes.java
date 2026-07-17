@@ -90,7 +90,11 @@ public final class Gamemodes extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(this, gu, updateChecker), this);
         logger.info("Event listeners loaded!");
 
-        updateChecker.checkUpdate();
+        if (getConfig().getBoolean("enable-update-checker")) {
+            updateChecker.checkUpdate();
+        } else {
+            logger.info("Update checker disabled in config, not checking for updates.");
+        }
 
         logger.info("Plugin fully loaded.");
 
