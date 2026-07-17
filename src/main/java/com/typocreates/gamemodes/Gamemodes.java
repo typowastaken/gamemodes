@@ -64,6 +64,10 @@ public final class Gamemodes extends JavaPlugin {
             return getConfig().getString("send-target-message");
         }));
 
+        metrics.addCustomChart(new Metrics.SimplePie("update_checker_enabled", () -> {
+            return getConfig().getString("update-checker");
+        }));
+
         metrics.addCustomChart(new Metrics.SimplePie("config_version", () -> {
             return getConfig().getString("version");
         }));
@@ -90,12 +94,20 @@ public final class Gamemodes extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(this, gu, updateChecker), this);
         logger.info("Event listeners loaded!");
 
-        updateChecker.checkUpdate();
+        if (gu.isUpdateCheckEnabled()) {
+            updateChecker.checkUpdate();
+        } else {
+            logger.info("Update checker disabled in config, not checking for updates.");
+        }
 
         logger.info("Plugin fully loaded.");
 
         if (!getConfig().isSet("send-target-message")) {
-            logger.warning("The default config for the plugin has changed and now contains a new option called 'send-target-message', please set this option in the config or grab the updated config from the plugin page: https://modrinth.com/project/CD4bmArk");
+            logger.warning("The default config for the plugin has changed and now contains an option called 'send-target-message', please set this option in the config or grab the updated config from the plugin page: https://modrinth.com/project/CD4bmArk");
+        }
+
+        if (!getConfig().isSet("update-checker")) {
+            logger.warning("The default config for the plugin has changed and now contains an option called 'update-checker', please set this option in the config or grab the updated config from the plugin page: https://modrinth.com/project/CD4bmArk");
         }
     }
 
