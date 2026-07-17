@@ -47,6 +47,8 @@ public class GeneralUtil {
         return plugin.getConfig().getBoolean("send-target-message", true);
     }
 
+    public boolean isUpdateCheckEnabled() { return plugin.getConfig().getBoolean("update-checker", true); };
+
     // Gamemode change strings
     public String getTargetGamemodeChangeMsg(String gm) {
         return "Your gamemode has been set to {gm}.".replace("{gm}", gm);
