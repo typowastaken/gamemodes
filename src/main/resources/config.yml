@@ -13,7 +13,7 @@ send-target-message: true
 
 # Do you want to enable update checking? This is enabled by default.
 # Options: true, false
-enable-update-checker: true
+update-checker: true
 
 # Config version:
 version: 1.0.2
