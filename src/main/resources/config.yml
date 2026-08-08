@@ -28,4 +28,4 @@ messages:
   gamemode-blocked: "That user isn't allowed in {gamemode}!"
 
 # Config version:
-version: 1.0.2
+version: 1.0.3
