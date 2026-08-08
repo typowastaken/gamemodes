@@ -15,5 +15,17 @@ send-target-message: true
 # Options: true, false
 update-checker: true
 
+# All messages that are sent to the player, configurable here!
+# {gamemode} will be replaced with the gamemode! (Only on applicable messages!)
+# {player} will be replaced with the player! (Only on applicable messages!)
+messages:
+  target-gamemode-change: "Your gamemode has been set to {gamemode}."
+  executor-confirmation: "{player}'s gamemode has been set to {gamemode}."
+  executor-not-player: "You have to be a player or target a player to use this command."
+  target-not-found: "That player could not be found, maybe they went offline?"
+  too-many-args: "You can only have a maximum of 1 argument for this command."
+  gamemode-locked: "Unable to change that users gamemode! Their gamemode is currently locked!"
+  gamemode-blocked: "That user isn't allowed in {gamemode}!"
+
 # Config version:
 version: 1.0.2

@@ -50,31 +50,42 @@ public class GeneralUtil {
     public boolean isUpdateCheckEnabled() { return plugin.getConfig().getBoolean("update-checker", true); }
 
     // Gamemode change strings
-    public String getTargetGamemodeChangeMsg(String gm) {
-        return "Your gamemode has been set to {gm}.".replace("{gm}", gm);
+    public String getTargetGamemodeChangeMsg(String gamemode) {
+        return plugin.getConfig()
+                .getString("messages.target-gamemode-change", "Your gamemode has been set to {gamemode}.")
+                .replace("{gamemode}", gamemode);
     }
 
-    public String getConfirmationMsg(String gm) {
-        return "%s's gamemode has been set to {gm}.".replace("{gm}", gm);
+    public String getExecutorConfirmationMsg(String gamemode, String targetPlayer) {
+        return plugin.getConfig()
+                .getString("messages.executor-confirmation", "{player}'s gamemode has been set to {gamemode}.")
+                .replace("{gamemode}", gamemode)
+                .replace("{player}", targetPlayer);
     }
 
-    public String getSenderNotPlayerMsg() {
-        return "You either have to be a player or target a player to use this command.";
+    public String getExecutorNotPlayerMsg() {
+        return plugin.getConfig()
+                .getString("messages.executor-not-player", "You have to be a player or target a player to use this command.");
     }
 
-    public String getPlayerNotFoundMsg() {
-        return "That player could not be found, maybe they went offline?";
+    public String getTargetNotFoundMsg() {
+        return plugin.getConfig()
+                .getString("messages.target-not-found", "That player could not be found, maybe they went offline?");
     }
 
     public String getTooManyArgsMsg() {
-        return "You can only have a maximum of 1 argument for this command.";
+        return plugin.getConfig()
+                .getString("messages.too-many-args", "You can only have a maximum of 1 argument for this command.");
     }
 
-    public String getUnableToChangeGamemodeMsg() {
-        return "Unable to change that users gamemode! Their gamemode is currently locked!";
+    public String getGamemodeLockedMsg() {
+        return plugin.getConfig()
+                .getString("messages.gamemode-locked", "Unable to change that users gamemode! Their gamemode is currently locked!");
     }
 
-    public String getGamemodeChangeNotAllowedMsg(String gm) {
-        return "That user isn't allowed in {gm}!".replace("{gm}", gm);
+    public String getGamemodeBlockedMsg(String gamemode) {
+        return plugin.getConfig()
+                .getString("messages.gamemode-blocked", "That user isn't allowed in {gamemode}!")
+                .replace("{gamemode}", gamemode);
     }
 }
