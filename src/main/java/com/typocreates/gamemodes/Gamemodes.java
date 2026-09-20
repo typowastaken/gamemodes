@@ -4,7 +4,6 @@ import com.typocreates.gamemodes.commands.*;
 import com.typocreates.gamemodes.data.GmLockData;
 import com.typocreates.gamemodes.listeners.PlayerGamemodeChangeListener;
 import com.typocreates.gamemodes.listeners.PlayerJoinListener;
-import com.typocreates.gamemodes.tabcompleters.GmLockTabCompleter;
 import com.typocreates.gamemodes.utils.GeneralUtil;
 import com.typocreates.gamemodes.utils.UpdateChecker;
 import org.bukkit.Bukkit;
@@ -84,7 +83,7 @@ public final class Gamemodes extends JavaPlugin {
         getCommand("gms").setExecutor(new Survival(gu, gmLockData));
         getCommand("gmsp").setExecutor(new Spectator(gu, gmLockData));
         getCommand("gmlock").setExecutor(new Lock(gu, gmLockData));
-        getCommand("gmlock").setTabCompleter(new GmLockTabCompleter());
+        getCommand("gmlock").setTabCompleter(new Lock(gu, gmLockData));
         getCommand("gmunlock").setExecutor(new Unlock(gu, gmLockData));
         getCommand("gmreload").setExecutor(new Reload(plugin, gu));
         logger.info("Commands loaded!");

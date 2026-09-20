@@ -6,12 +6,14 @@ import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Lock implements CommandExecutor {
+public class Lock implements CommandExecutor, TabCompleter {
     private final GeneralUtil gu;
     private final GmLockData gmLockData;
     public Lock(GeneralUtil gu, GmLockData gmLockData) {
@@ -57,5 +59,25 @@ public class Lock implements CommandExecutor {
             return true;
         }
         return true;
+    }
+
+    @Override
+    public List<String> onTabComplete(@NonNull CommandSender commandSender, @NonNull Command command, @NonNull String s, String[] strings) {
+        if (strings.length == 2) {
+            List<String> gamemodes = new ArrayList<>();
+            gamemodes.add("adventure");
+            gamemodes.add("creative");
+            gamemodes.add("survival");
+            gamemodes.add("spectator");
+
+            gamemodes.removeIf(gm -> !(gm.startsWith(strings[1].toLowerCase())));
+
+            return gamemodes;
+        }
+
+        if (strings.length > 2) {
+            return new ArrayList<>();
+        }
+        return null;
     }
 }
