@@ -11,10 +11,10 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.List;
 
-public class GmLockCommand implements CommandExecutor {
+public class Lock implements CommandExecutor {
     private final GeneralUtil gu;
     private final GmLockData gmLockData;
-    public GmLockCommand(GeneralUtil gu, GmLockData gmLockData) {
+    public Lock(GeneralUtil gu, GmLockData gmLockData) {
         this.gu = gu;
         this.gmLockData = gmLockData;
     }

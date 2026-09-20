@@ -8,10 +8,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-public class GmUnlockCommand implements CommandExecutor {
+public class Unlock implements CommandExecutor {
     private final GeneralUtil gu;
     private final GmLockData gmLockData;
-    public GmUnlockCommand(GeneralUtil gu, GmLockData gmLockData) {
+    public Unlock(GeneralUtil gu, GmLockData gmLockData) {
         this.gu = gu;
         this.gmLockData = gmLockData;
     }

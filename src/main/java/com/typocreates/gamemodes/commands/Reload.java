@@ -7,10 +7,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-public class GmreloadCommand implements CommandExecutor {
+public class Reload implements CommandExecutor {
     private final Gamemodes plugin;
     private final GeneralUtil gu;
-    public GmreloadCommand(Gamemodes plugin, GeneralUtil gu) {
+    public Reload(Gamemodes plugin, GeneralUtil gu) {
         this.plugin = plugin;
         this.gu = gu;
     }

@@ -9,17 +9,17 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-public class GmspCommand implements CommandExecutor {
+public class Creative implements CommandExecutor {
     private final GeneralUtil gu;
     private final GmLockData gmLockData;
-    public GmspCommand(GeneralUtil gu, GmLockData gmLockData) {
+    public Creative(GeneralUtil gu, GmLockData gmLockData) {
         this.gu = gu;
         this.gmLockData = gmLockData;
     }
 
     @Override
     public boolean onCommand(@NonNull CommandSender commandSender, @NonNull Command command, @NonNull String s, String[] strings) {
-        String gamemode = "Spectator";
+        String gamemode = "Creative";
 
 //        If there are no args, set players gamemode, if the commandSender isn't a player, send error.
         if (strings.length == 0) {
@@ -28,12 +28,12 @@ public class GmspCommand implements CommandExecutor {
                     gu.sendErrorMessage(player, gu.getGamemodeLockedMsg());
                     return true;
                 }
-                if (gu.isGamemodeBlocked(player, GameMode.SPECTATOR)) {
+                if (gu.isGamemodeBlocked(player, GameMode.CREATIVE)) {
                     gu.sendErrorMessage(commandSender, gu.getGamemodeBlockedMsg(gamemode));
                     return true;
                 }
                 gu.sendMessage(player, gu.getTargetGamemodeChangeMsg(gamemode));
-                player.setGameMode(GameMode.SPECTATOR);
+                player.setGameMode(GameMode.CREATIVE);
                 return true;
             }
             gu.sendMessage(commandSender, gu.getExecutorNotPlayerMsg());
@@ -51,11 +51,11 @@ public class GmspCommand implements CommandExecutor {
                 gu.sendErrorMessage(commandSender, gu.getGamemodeLockedMsg());
                 return true;
             }
-            if (gu.isGamemodeBlocked(target, GameMode.SPECTATOR)) {
+            if (gu.isGamemodeBlocked(target, GameMode.CREATIVE)) {
                 gu.sendErrorMessage(commandSender, gu.getGamemodeBlockedMsg(gamemode));
                 return true;
             }
-            target.setGameMode(GameMode.SPECTATOR);
+            target.setGameMode(GameMode.CREATIVE);
             gu.sendMessage(commandSender, gu.getExecutorConfirmationMsg(gamemode, target.getName()));
             if (gu.sendTarget() && commandSender != target) {
                 gu.sendMessage(target, gu.getTargetGamemodeChangeMsg(gamemode));
