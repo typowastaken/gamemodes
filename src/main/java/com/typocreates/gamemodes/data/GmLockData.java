@@ -23,7 +23,8 @@ public class GmLockData {
             try {
                 file.createNewFile();
             } catch (IOException e) {
-                plugin.getLogger().warning("Couldn't create the GamemodeLockData file, reach out to the plugin creator @TypoWasTaken on Discord.");
+                plugin.getLogger().warning(e.getMessage());
+                plugin.getLogger().warning("Couldn't create the GamemodeLockData file!");
             }
         }
         gmLockFile = YamlConfiguration.loadConfiguration(file);

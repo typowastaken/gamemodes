@@ -33,7 +33,9 @@ public class UpdateChecker {
                 logger.warning("The Modrinth API returned status 410! (The API for the update checker!)");
                 logger.warning("This means a major update has occurred to the API which requires an update.");
                 logger.warning("If you don't mind a few errors, this is likely fine. The update checker will be broken though.");
-                logger.warning("To fix this, please check if an update is available for this plugin:");
+                logger.warning("If you do mind this error, do one of the following:");
+                logger.warning("- Disable the update checker in the config.");
+                logger.warning("- Check if an update has been released to fix this error.");
                 logger.warning("https://modrinth.com/project/CD4bmArk");
                 logger.warning("==============================================================================================");
                 return;
