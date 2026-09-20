@@ -14,12 +14,12 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Logger;
 
-public class PlayerJoinListener implements Listener {
+public class PlayerJoin implements Listener {
     private final Gamemodes plugin;
     private final GeneralUtil gu;
     private final UpdateChecker updateChecker;
 
-    public PlayerJoinListener(Gamemodes plugin, GeneralUtil gu, UpdateChecker updateChecker) {
+    public PlayerJoin(Gamemodes plugin, GeneralUtil gu, UpdateChecker updateChecker) {
         this.plugin = plugin;
         this.gu = gu;
         this.updateChecker = updateChecker;

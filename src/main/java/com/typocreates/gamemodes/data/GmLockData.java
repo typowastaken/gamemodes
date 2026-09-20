@@ -45,7 +45,8 @@ public class GmLockData {
         try {
             gmLockFile.save(file);
         } catch (IOException e) {
-            plugin.getLogger().warning("Couldn't save the GamemodeLockData file, reach out to the plugin creator @TypoWasTaken on Discord.");
+            plugin.getLogger().warning(e.getMessage());
+            plugin.getLogger().warning("Couldn't save the GamemodeLockData file!");
         }
     }
     public void reload() {

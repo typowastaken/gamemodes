@@ -2,8 +2,8 @@ package com.typocreates.gamemodes;
 
 import com.typocreates.gamemodes.commands.*;
 import com.typocreates.gamemodes.data.GmLockData;
-import com.typocreates.gamemodes.listeners.PlayerGamemodeChangeListener;
-import com.typocreates.gamemodes.listeners.PlayerJoinListener;
+import com.typocreates.gamemodes.listeners.PlayerGamemodeChange;
+import com.typocreates.gamemodes.listeners.PlayerJoin;
 import com.typocreates.gamemodes.utils.GeneralUtil;
 import com.typocreates.gamemodes.utils.UpdateChecker;
 import org.bukkit.Bukkit;
@@ -89,8 +89,8 @@ public final class Gamemodes extends JavaPlugin {
         logger.info("Commands loaded!");
 
         logger.info("Loading event listeners...");
-        getServer().getPluginManager().registerEvents(new PlayerGamemodeChangeListener(gu, gmLockData), this);
-        getServer().getPluginManager().registerEvents(new PlayerJoinListener(this, gu, updateChecker), this);
+        getServer().getPluginManager().registerEvents(new PlayerGamemodeChange(gu, gmLockData), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoin(this, gu, updateChecker), this);
         logger.info("Event listeners loaded!");
 
         if (gu.isUpdateCheckEnabled()) {
