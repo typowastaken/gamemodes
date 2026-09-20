@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.typocreates.gamemodes.Gamemodes;
-import com.typocreates.gamemodes.data.UpdateCheckResponse;
+import com.typocreates.gamemodes.model.UpdateCheckResponse;
 
 import java.net.URI;
 import java.net.http.HttpClient;

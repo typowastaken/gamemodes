@@ -1,7 +1,7 @@
 package com.typocreates.gamemodes.listeners;
 
 import com.typocreates.gamemodes.Gamemodes;
-import com.typocreates.gamemodes.data.UpdateCheckResponse;
+import com.typocreates.gamemodes.model.UpdateCheckResponse;
 import com.typocreates.gamemodes.utils.GeneralUtil;
 import com.typocreates.gamemodes.utils.UpdateChecker;
 import org.bukkit.Bukkit;
