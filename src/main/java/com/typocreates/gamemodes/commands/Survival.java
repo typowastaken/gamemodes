@@ -43,9 +43,8 @@ public class Survival implements CommandExecutor {
 
 //        If there is one arg, get the player & set their gamemode if the player exists
         if (strings.length == 1) {
-//            If the commandSender doesn't have the permission to change other players gamemodes, tell them there are too many args
             if (!commandSender.hasPermission("gamemodes.changeothers")) {
-                gu.sendErrorMessage(commandSender, gu.getTooManyArgsMsg());
+                gu.sendErrorMessage(commandSender, gu.getNotEnoughPermsMsg());
                 return true;
             }
             Player target = Bukkit.getServer().getPlayer(strings[0]);

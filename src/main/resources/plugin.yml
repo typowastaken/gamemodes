@@ -65,6 +65,8 @@ permissions:
 
   gamemodes.gmlock:
     description: Allows the player to use the /gmlock <player> <gamemode> command.
+  children:
+    gamemodes.changeothers: true
 
   gamemodes.gmunlock:
     description: Allows the player to use the /gmunlock <player> command.

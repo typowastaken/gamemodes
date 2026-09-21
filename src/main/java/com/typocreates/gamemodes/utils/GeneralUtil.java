@@ -88,4 +88,9 @@ public class GeneralUtil {
                 .getString("messages.gamemode-blocked", "That user isn't allowed in {gamemode}!")
                 .replace("{gamemode}", gamemode);
     }
+
+    public String getNotEnoughPermsMsg() {
+        return plugin.getConfig()
+                .getString("messages.not-enough-perms", "You don't have the required permissions to do that!");
+    }
 }
