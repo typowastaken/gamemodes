@@ -40,7 +40,7 @@ public class PlayerJoin implements Listener {
             }
         }
 
-        if (gu.isUpdateCheckEnabled() && p.hasPermission("gamemodes.notifyupdate")) {
+        if (!plugin.getDescription().getVersion().endsWith("[Dev]") && gu.isUpdateCheckEnabled() && p.hasPermission("gamemodes.notifyupdate")) {
             Bukkit.getScheduler().runTaskLater(plugin, () -> {
                 CompletableFuture<UpdateCheckResponse> future = updateChecker.getLatestVersion();
                 future.thenAccept((data) -> {

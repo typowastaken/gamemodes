@@ -93,11 +93,14 @@ public final class Gamemodes extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerJoin(this, gu, updateChecker), this);
         logger.info("Event listeners loaded!");
 
-        if (gu.isUpdateCheckEnabled()) {
+        if (plugin.getDescription().getVersion().endsWith("[Dev]")) {
+            logger.warning("Update checker disabled, developer build installed!");
+        } else if (gu.isUpdateCheckEnabled()) {
             updateChecker.checkUpdate();
         } else {
             logger.info("Update checker disabled in config, not checking for updates.");
         }
+
 
         logger.info("Plugin fully loaded.");
 
