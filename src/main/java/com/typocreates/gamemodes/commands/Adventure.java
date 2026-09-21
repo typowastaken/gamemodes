@@ -1,5 +1,6 @@
 package com.typocreates.gamemodes.commands;
 import com.typocreates.gamemodes.data.GmLockData;
+import com.typocreates.gamemodes.model.GM;
 import com.typocreates.gamemodes.utils.GeneralUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -9,17 +10,18 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-public class GmaCommand implements CommandExecutor {
+public class Adventure implements CommandExecutor {
     private final GeneralUtil gu;
     private final GmLockData gmLockData;
-    public GmaCommand(GeneralUtil gu, GmLockData gmLockData) {
+    public Adventure(GeneralUtil gu, GmLockData gmLockData) {
         this.gu = gu;
         this.gmLockData = gmLockData;
     }
 
     @Override
     public boolean onCommand(@NonNull CommandSender commandSender, @NonNull Command command, @NonNull String s, String[] strings) {
-        String gamemode = "Adventure";
+        String gamemodeLabel = GM.ADVENTURE.label;
+        GameMode gamemode = GM.ADVENTURE.gamemode;
 //        If there are no args, set players gamemode, if the commandSender isn't a player, send error.
         if (strings.length == 0) {
             if (commandSender instanceof Player player) {
@@ -27,12 +29,12 @@ public class GmaCommand implements CommandExecutor {
                     gu.sendErrorMessage(player, gu.getGamemodeLockedMsg());
                     return true;
                 }
-                if (gu.isGamemodeBlocked(player, GameMode.ADVENTURE)) {
-                    gu.sendErrorMessage(commandSender, gu.getGamemodeBlockedMsg(gamemode));
+                if (gu.isGamemodeBlocked(player, gamemode)) {
+                    gu.sendErrorMessage(commandSender, gu.getGamemodeBlockedMsg(gamemodeLabel));
                     return true;
                 }
-                gu.sendMessage(player, gu.getTargetGamemodeChangeMsg(gamemode));
-                player.setGameMode(GameMode.ADVENTURE);
+                gu.sendMessage(player, gu.getTargetGamemodeChangeMsg(gamemodeLabel));
+                player.setGameMode(gamemode);
                 return true;
             }
             gu.sendMessage(commandSender, gu.getExecutorNotPlayerMsg());
@@ -41,11 +43,6 @@ public class GmaCommand implements CommandExecutor {
 
 //        If there is one arg, get the player & set their gamemode if the player exists
         if (strings.length == 1) {
-//            If the commandSender doesn't have the permission to change other players gamemodes, tell them there are too many args
-            if (!commandSender.hasPermission("gamemodes.changeothers")) {
-                gu.sendErrorMessage(commandSender, gu.getTooManyArgsMsg());
-                return true;
-            }
             Player target = Bukkit.getServer().getPlayer(strings[0]);
             if (target == null) {
                 gu.sendErrorMessage(commandSender, gu.getTargetNotFoundMsg());
@@ -55,14 +52,14 @@ public class GmaCommand implements CommandExecutor {
                 gu.sendErrorMessage(commandSender, gu.getGamemodeLockedMsg());
                 return true;
             }
-            if (gu.isGamemodeBlocked(target, GameMode.ADVENTURE)) {
-                gu.sendErrorMessage(commandSender, gu.getGamemodeBlockedMsg(gamemode));
+            if (gu.isGamemodeBlocked(target, gamemode)) {
+                gu.sendErrorMessage(commandSender, gu.getGamemodeBlockedMsg(gamemodeLabel));
                 return true;
             }
-            target.setGameMode(GameMode.ADVENTURE);
-            gu.sendMessage(commandSender, gu.getExecutorConfirmationMsg(gamemode, target.getName()));
+            target.setGameMode(gamemode);
+            gu.sendMessage(commandSender, gu.getExecutorConfirmationMsg(gamemodeLabel, target.getName()));
             if (gu.sendTarget() && commandSender != target) {
-                gu.sendMessage(target, gu.getTargetGamemodeChangeMsg(gamemode));
+                gu.sendMessage(target, gu.getTargetGamemodeChangeMsg(gamemodeLabel));
             }
             return true;
         }
