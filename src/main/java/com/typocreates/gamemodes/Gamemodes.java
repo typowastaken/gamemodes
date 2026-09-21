@@ -2,9 +2,8 @@ package com.typocreates.gamemodes;
 
 import com.typocreates.gamemodes.commands.*;
 import com.typocreates.gamemodes.data.GmLockData;
-import com.typocreates.gamemodes.listeners.PlayerGamemodeChangeListener;
-import com.typocreates.gamemodes.listeners.PlayerJoinListener;
-import com.typocreates.gamemodes.tabcompleters.GmLockTabCompleter;
+import com.typocreates.gamemodes.listeners.PlayerGamemodeChange;
+import com.typocreates.gamemodes.listeners.PlayerJoin;
 import com.typocreates.gamemodes.utils.GeneralUtil;
 import com.typocreates.gamemodes.utils.UpdateChecker;
 import org.bukkit.Bukkit;
@@ -18,10 +17,6 @@ import java.util.logging.Logger;
 
 public final class Gamemodes extends JavaPlugin {
     private Gamemodes plugin;
-    private GeneralUtil gu;
-    private GmLockData gmLockData;
-    private UpdateChecker updateChecker;
-
 
     @Override
     public void onEnable() {
@@ -52,53 +47,60 @@ public final class Gamemodes extends JavaPlugin {
 
 //         Load config THEN set gu since it relies on the config
         saveDefaultConfig();
-        gu = new GeneralUtil(this);
-        updateChecker = new UpdateChecker(this);
+        GeneralUtil gu = new GeneralUtil(this);
+        UpdateChecker updateChecker = new UpdateChecker(this);
 
 //        Add config statistics
         metrics.addCustomChart(new Metrics.SimplePie("sounds_enabled", () -> {
+            //noinspection CodeBlock2Expr
             return getConfig().getString("do-sound-effects");
         }));
 
         metrics.addCustomChart(new Metrics.SimplePie("target_message_enabled", () -> {
+            //noinspection CodeBlock2Expr
             return getConfig().getString("send-target-message");
         }));
 
         metrics.addCustomChart(new Metrics.SimplePie("update_checker_enabled", () -> {
+            //noinspection CodeBlock2Expr
             return getConfig().getString("update-checker");
         }));
 
         metrics.addCustomChart(new Metrics.SimplePie("config_version", () -> {
+            //noinspection CodeBlock2Expr
             return getConfig().getString("version");
         }));
 
 //         Load the GamemodeLockData file
-        gmLockData = new GmLockData(this);
+        GmLockData gmLockData = new GmLockData(this);
         gmLockData.setup();
         gmLockData.get().options().copyDefaults(true);
         gmLockData.save();
 //         Loads commands
         logger.info("Loading commands...");
-        getCommand("gma").setExecutor(new GmaCommand(gu, gmLockData));
-        getCommand("gmc").setExecutor(new GmcCommand(gu, gmLockData));
-        getCommand("gms").setExecutor(new GmsCommand(gu, gmLockData));
-        getCommand("gmsp").setExecutor(new GmspCommand(gu, gmLockData));
-        getCommand("gmlock").setExecutor(new GmLockCommand(gu, gmLockData));
-        getCommand("gmlock").setTabCompleter(new GmLockTabCompleter());
-        getCommand("gmunlock").setExecutor(new GmUnlockCommand(gu, gmLockData));
-        getCommand("gmreload").setExecutor(new GmreloadCommand(plugin, gu));
+        getCommand("gma").setExecutor(new Adventure(gu, gmLockData));
+        getCommand("gmc").setExecutor(new Creative(gu, gmLockData));
+        getCommand("gms").setExecutor(new Survival(gu, gmLockData));
+        getCommand("gmsp").setExecutor(new Spectator(gu, gmLockData));
+        getCommand("gmlock").setExecutor(new Lock(gu, gmLockData));
+        getCommand("gmlock").setTabCompleter(new Lock(gu, gmLockData));
+        getCommand("gmunlock").setExecutor(new Unlock(gu, gmLockData));
+        getCommand("gmreload").setExecutor(new Reload(plugin, gu));
         logger.info("Commands loaded!");
 
         logger.info("Loading event listeners...");
-        getServer().getPluginManager().registerEvents(new PlayerGamemodeChangeListener(gu, gmLockData), this);
-        getServer().getPluginManager().registerEvents(new PlayerJoinListener(this, gu, updateChecker), this);
+        getServer().getPluginManager().registerEvents(new PlayerGamemodeChange(gu, gmLockData), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoin(this, gu, updateChecker), this);
         logger.info("Event listeners loaded!");
 
-        if (gu.isUpdateCheckEnabled()) {
+        if (plugin.getDescription().getVersion().endsWith("[Dev]")) {
+            logger.warning("Update checker disabled, developer build installed!");
+        } else if (gu.isUpdateCheckEnabled()) {
             updateChecker.checkUpdate();
         } else {
             logger.info("Update checker disabled in config, not checking for updates.");
         }
+
 
         logger.info("Plugin fully loaded.");
 

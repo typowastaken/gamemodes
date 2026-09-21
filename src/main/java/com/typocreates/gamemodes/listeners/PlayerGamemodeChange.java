@@ -7,10 +7,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 
-public class PlayerGamemodeChangeListener implements Listener {
+public class PlayerGamemodeChange implements Listener {
     private final GeneralUtil gu;
     private final GmLockData gmLockData;
-    public PlayerGamemodeChangeListener(GeneralUtil gu, GmLockData gmLockData) {
+    public PlayerGamemodeChange(GeneralUtil gu, GmLockData gmLockData) {
         this.gu = gu;
         this.gmLockData = gmLockData;
     }

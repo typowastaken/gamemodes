@@ -1,5 +1,6 @@
 package com.typocreates.gamemodes.commands;
 import com.typocreates.gamemodes.data.GmLockData;
+import com.typocreates.gamemodes.model.GM;
 import com.typocreates.gamemodes.utils.GeneralUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -9,18 +10,18 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-public class GmcCommand implements CommandExecutor {
+public class Survival implements CommandExecutor {
     private final GeneralUtil gu;
     private final GmLockData gmLockData;
-    public GmcCommand(GeneralUtil gu, GmLockData gmLockData) {
+    public Survival(GeneralUtil gu, GmLockData gmLockData) {
         this.gu = gu;
         this.gmLockData = gmLockData;
     }
 
     @Override
     public boolean onCommand(@NonNull CommandSender commandSender, @NonNull Command command, @NonNull String s, String[] strings) {
-        String gamemode = "Creative";
-
+        String gamemodeLabel = GM.SURVIVAL.label;
+        GameMode gamemode = GM.SURVIVAL.gamemode;
 //        If there are no args, set players gamemode, if the commandSender isn't a player, send error.
         if (strings.length == 0) {
             if (commandSender instanceof Player player) {
@@ -28,12 +29,12 @@ public class GmcCommand implements CommandExecutor {
                     gu.sendErrorMessage(player, gu.getGamemodeLockedMsg());
                     return true;
                 }
-                if (gu.isGamemodeBlocked(player, GameMode.CREATIVE)) {
-                    gu.sendErrorMessage(commandSender, gu.getGamemodeBlockedMsg(gamemode));
+                if (gu.isGamemodeBlocked(player, gamemode)) {
+                    gu.sendErrorMessage(commandSender, gu.getGamemodeBlockedMsg(gamemodeLabel));
                     return true;
                 }
-                gu.sendMessage(player, gu.getTargetGamemodeChangeMsg(gamemode));
-                player.setGameMode(GameMode.CREATIVE);
+                gu.sendMessage(player, gu.getTargetGamemodeChangeMsg(gamemodeLabel));
+                player.setGameMode(gamemode);
                 return true;
             }
             gu.sendMessage(commandSender, gu.getExecutorNotPlayerMsg());
@@ -51,14 +52,14 @@ public class GmcCommand implements CommandExecutor {
                 gu.sendErrorMessage(commandSender, gu.getGamemodeLockedMsg());
                 return true;
             }
-            if (gu.isGamemodeBlocked(target, GameMode.CREATIVE)) {
-                gu.sendErrorMessage(commandSender, gu.getGamemodeBlockedMsg(gamemode));
+            if (gu.isGamemodeBlocked(target, gamemode)) {
+                gu.sendErrorMessage(commandSender, gu.getGamemodeBlockedMsg(gamemodeLabel));
                 return true;
             }
-            target.setGameMode(GameMode.CREATIVE);
-            gu.sendMessage(commandSender, gu.getExecutorConfirmationMsg(gamemode, target.getName()));
+            target.setGameMode(gamemode);
+            gu.sendMessage(commandSender, gu.getExecutorConfirmationMsg(gamemodeLabel, target.getName()));
             if (gu.sendTarget() && commandSender != target) {
-                gu.sendMessage(target, gu.getTargetGamemodeChangeMsg(gamemode));
+                gu.sendMessage(target, gu.getTargetGamemodeChangeMsg(gamemodeLabel));
             }
             return true;
         }

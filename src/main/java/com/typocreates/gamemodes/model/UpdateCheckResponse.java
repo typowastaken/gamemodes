@@ -1,4 +1,4 @@
-package com.typocreates.gamemodes.data;
+package com.typocreates.gamemodes.model;
 
 public class UpdateCheckResponse {
     private final int statusCode;

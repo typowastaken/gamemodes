@@ -1,7 +1,7 @@
 package com.typocreates.gamemodes.listeners;
 
 import com.typocreates.gamemodes.Gamemodes;
-import com.typocreates.gamemodes.data.UpdateCheckResponse;
+import com.typocreates.gamemodes.model.UpdateCheckResponse;
 import com.typocreates.gamemodes.utils.GeneralUtil;
 import com.typocreates.gamemodes.utils.UpdateChecker;
 import org.bukkit.Bukkit;
@@ -14,12 +14,12 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Logger;
 
-public class PlayerJoinListener implements Listener {
+public class PlayerJoin implements Listener {
     private final Gamemodes plugin;
     private final GeneralUtil gu;
     private final UpdateChecker updateChecker;
 
-    public PlayerJoinListener(Gamemodes plugin, GeneralUtil gu, UpdateChecker updateChecker) {
+    public PlayerJoin(Gamemodes plugin, GeneralUtil gu, UpdateChecker updateChecker) {
         this.plugin = plugin;
         this.gu = gu;
         this.updateChecker = updateChecker;
@@ -40,7 +40,7 @@ public class PlayerJoinListener implements Listener {
             }
         }
 
-        if (gu.isUpdateCheckEnabled() && p.hasPermission("gamemodes.notifyupdate")) {
+        if (!plugin.getDescription().getVersion().endsWith("[Dev]") && gu.isUpdateCheckEnabled() && p.hasPermission("gamemodes.notifyupdate")) {
             Bukkit.getScheduler().runTaskLater(plugin, () -> {
                 CompletableFuture<UpdateCheckResponse> future = updateChecker.getLatestVersion();
                 future.thenAccept((data) -> {
