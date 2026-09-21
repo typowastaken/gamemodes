@@ -10,7 +10,7 @@ public enum GM {
 
     public final String label;
     public final GameMode gamemode;
-    private GM(String label, GameMode gamemode) {
+    GM(String label, GameMode gamemode) {
         this.label = label;
         this.gamemode = gamemode;
     }

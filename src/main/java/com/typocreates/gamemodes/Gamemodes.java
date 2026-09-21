@@ -17,9 +17,6 @@ import java.util.logging.Logger;
 
 public final class Gamemodes extends JavaPlugin {
     private Gamemodes plugin;
-    private GeneralUtil gu;
-    private GmLockData gmLockData;
-    private UpdateChecker updateChecker;
 
 
     @Override
@@ -51,8 +48,8 @@ public final class Gamemodes extends JavaPlugin {
 
 //         Load config THEN set gu since it relies on the config
         saveDefaultConfig();
-        gu = new GeneralUtil(this);
-        updateChecker = new UpdateChecker(this);
+        GeneralUtil gu = new GeneralUtil(this);
+        UpdateChecker updateChecker = new UpdateChecker(this);
 
 //        Add config statistics
         metrics.addCustomChart(new Metrics.SimplePie("sounds_enabled", () -> {
@@ -72,7 +69,7 @@ public final class Gamemodes extends JavaPlugin {
         }));
 
 //         Load the GamemodeLockData file
-        gmLockData = new GmLockData(this);
+        GmLockData gmLockData = new GmLockData(this);
         gmLockData.setup();
         gmLockData.get().options().copyDefaults(true);
         gmLockData.save();
