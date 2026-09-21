@@ -18,7 +18,6 @@ import java.util.logging.Logger;
 public final class Gamemodes extends JavaPlugin {
     private Gamemodes plugin;
 
-
     @Override
     public void onEnable() {
         plugin = this;
@@ -53,18 +52,22 @@ public final class Gamemodes extends JavaPlugin {
 
 //        Add config statistics
         metrics.addCustomChart(new Metrics.SimplePie("sounds_enabled", () -> {
+            //noinspection CodeBlock2Expr
             return getConfig().getString("do-sound-effects");
         }));
 
         metrics.addCustomChart(new Metrics.SimplePie("target_message_enabled", () -> {
+            //noinspection CodeBlock2Expr
             return getConfig().getString("send-target-message");
         }));
 
         metrics.addCustomChart(new Metrics.SimplePie("update_checker_enabled", () -> {
+            //noinspection CodeBlock2Expr
             return getConfig().getString("update-checker");
         }));
 
         metrics.addCustomChart(new Metrics.SimplePie("config_version", () -> {
+            //noinspection CodeBlock2Expr
             return getConfig().getString("version");
         }));
 
