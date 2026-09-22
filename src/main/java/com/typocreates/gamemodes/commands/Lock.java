@@ -38,6 +38,18 @@ public class Lock implements CommandExecutor, TabCompleter {
                 return true;
             }
 
+            if (!commandSender.hasPermission("gamemodes.changeothers")) {
+                if (commandSender instanceof Player player) {
+                    if (player.getUniqueId() != target.getUniqueId()) {
+                        gu.sendErrorMessage(commandSender, gu.getNotEnoughPermsMsg());
+                        return true;
+                    }
+                } else {
+                    gu.sendErrorMessage(commandSender, gu.getNotEnoughPermsMsg());
+                    return true;
+                }
+            }
+
             List<String> gamemodes = List.of("ADVENTURE", "CREATIVE", "SURVIVAL", "SPECTATOR");
             String gamemode = strings[1];
             if (!gamemodes.contains(gamemode.toUpperCase())) {

@@ -26,6 +26,7 @@ messages:
   too-many-args: "You can only have a maximum of 1 argument for this command."
   gamemode-locked: "Unable to change that users gamemode! Their gamemode is currently locked!"
   gamemode-blocked: "That user isn't allowed in {gamemode}!"
+  not-enough-perms: "You don't have the required permissions to do that!"
 
 # Config version:
 version: 1.0.3

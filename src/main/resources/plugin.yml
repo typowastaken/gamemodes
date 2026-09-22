@@ -52,6 +52,9 @@ permissions:
   gamemodes.gmsp:
     description: Allows the player to use the /gmsp <player> command.
 
+  gamemodes.changeothers:
+    description: Allows the player to change the gamemode of other players.
+
   gamemodes.gmlock:
     description: Allows the player to use the /gmlock <player> <gamemode> command.
 

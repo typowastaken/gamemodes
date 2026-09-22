@@ -43,6 +43,10 @@ public class Adventure implements CommandExecutor {
 
 //        If there is one arg, get the player & set their gamemode if the player exists
         if (strings.length == 1) {
+            if (!commandSender.hasPermission("gamemodes.changeothers")) {
+                gu.sendErrorMessage(commandSender, gu.getNotEnoughPermsMsg());
+                return true;
+            }
             Player target = Bukkit.getServer().getPlayer(strings[0]);
             if (target == null) {
                 gu.sendErrorMessage(commandSender, gu.getTargetNotFoundMsg());
