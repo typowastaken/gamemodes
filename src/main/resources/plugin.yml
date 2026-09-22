@@ -42,31 +42,21 @@ permissions:
 
   gamemodes.gma:
     description: Allows the player to use the /gma <player> command.
-    children:
-      gamemodes.changeothers: true
 
   gamemodes.gmc:
     description: Allows the player to use the /gmc <player> command.
-    children:
-      gamemodes.changeothers: true
 
   gamemodes.gms:
     description: Allows the player to use the /gms <player> command.
-    children:
-      gamemodes.changeothers: true
 
   gamemodes.gmsp:
     description: Allows the player to use the /gmsp <player> command.
-    children:
-      gamemodes.changeothers: true
 
   gamemodes.changeothers:
     description: Allows the player to change the gamemode of other players.
 
   gamemodes.gmlock:
     description: Allows the player to use the /gmlock <player> <gamemode> command.
-  children:
-    gamemodes.changeothers: true
 
   gamemodes.gmunlock:
     description: Allows the player to use the /gmunlock <player> command.
