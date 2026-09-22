@@ -2,23 +2,15 @@ Here is the modrinth page to download the plugin! :D
 https://modrinth.com/project/CD4bmArk
 ---
 
-If you encounter any issues in the plugin, please report them using Github Issues or send me a DM on Fluxer! @typo#0001 :)
+If you encounter any issues in the plugin, please report them using [Github Issues](https://github.com/typowastaken/gamemodes/issues) or send me a DM on [Fluxer](https://fluxer.app/)! @typo#0001 :)
 
 Future plans:
-- Move the GMLock data over to SQLite
+- Move the GMLock data over to SQLite (will probably be done in the very distant future!)
 
-It may take awhile for things to get added as I've been really busy recently but any major issues should be fixed ASAP
-
-This plugin *loosely* follows semver for it's version number
 ---
-For the most part, the only things I do differently are:
-- I might bump the patch number instead of the minor number for non-bug fixes if I think the changes are small enough
-- I don't version development releases other than adding a [Dev] tag
 
+I'm not accepting PRs for this project at this time, if you'd like a new feature or found a bug, please create a [Github issue](https://github.com/typowastaken/gamemodes/issues) or DM me on [Fluxer](https://fluxer.app/)!
 
 ---
 
 This project is currently **source-available** and all rights are reserved
-
-
-*Psttt, if you're looking at the commit history and it looks weird, it's because I messed up while connecting my IDE to Github and it fucked up the histroy somehow* :sob:*, I have zero clue what I did but it's fixed now so that's all that matters!* :smile:
