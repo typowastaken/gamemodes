@@ -21,7 +21,7 @@ public class Spectator implements CommandExecutor {
     @Override
     public boolean onCommand(@NonNull CommandSender commandSender, @NonNull Command command, @NonNull String s, String[] strings) {
         String gamemodeLabel = GM.SPECTATOR.label;
-        GameMode gamemode = GM.SURVIVAL.gamemode;
+        GameMode gamemode = GM.SPECTATOR.gamemode;
 //        If there are no args, set players gamemode, if the commandSender isn't a player, send error.
         if (strings.length == 0) {
             if (commandSender instanceof Player player) {
