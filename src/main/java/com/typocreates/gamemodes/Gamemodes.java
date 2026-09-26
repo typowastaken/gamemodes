@@ -96,7 +96,7 @@ public final class Gamemodes extends JavaPlugin {
         if (plugin.getDescription().getVersion().endsWith("[Dev]")) {
             logger.warning("Update checker disabled, developer build installed!");
         } else if (gu.isUpdateCheckEnabled()) {
-            updateChecker.checkUpdate();
+            getServer().getScheduler().runTaskAsynchronously(this, updateChecker::checkUpdate);
         } else {
             logger.info("Update checker disabled in config, not checking for updates.");
         }
