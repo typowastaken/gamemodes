@@ -71,7 +71,7 @@ public class UpdateChecker {
             CompletableFuture<HttpResponse<String>> response = client.sendAsync(request, HttpResponse.BodyHandlers.ofString()).orTimeout(5, TimeUnit.SECONDS);
             response.exceptionally((e) -> {
                 logger.warning("Unable to check for updates! Do you have an internet connection?");
-                logger.warning(e.getMessage());
+                logger.warning("Error: " + e);
                 return null;
             });
             return response.thenApply((r) -> {
